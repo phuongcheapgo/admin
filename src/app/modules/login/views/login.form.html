@@ -1,0 +1,19 @@
+<div id="login">
+    <form class="form-sign-in" name="formSignIn" novalidate="">
+        <div class="title">
+            Sign in System
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control customize" placeholder="Email" ng-model="formData.email" required="" style="">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control customize" placeholder="Password" ng-model="formData.password" required="" style="">
+        </div>
+        
+        <div class="form-group clearfix">
+            <button ng-disabled="formSignIn.$invalid" class="btn btn-default btn-sign-in pull-left" type="submit" ng-click="loginAction(formData)">SIGN IN</button>
+            <a ui-sref="login.forgot" class="btn btn-link pull-right" style="padding: 12px 0;" href="#/login/forgot">Forgot Your Password</a>
+        </div>
+        
+    </form>
+</div>
