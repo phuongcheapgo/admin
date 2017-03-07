@@ -4,16 +4,11 @@
 
     angular
         .module('app')
-        .controller('IndexController', IndexController);
+        .controller('index.controller', controller);
 
     /** @ngInject */
-    function IndexController(fuseTheming)
+    function controller()
     {
-        var vm = this;
-
-        // Data
-        vm.themes = fuseTheming.themes;
-
-        //////////
+        console.log('index controller');
     }
 })();

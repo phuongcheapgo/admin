@@ -11,3 +11,103 @@
  */
 // injector
 // endinjector
+
+
+/** Common rules */
+
+$left : 230px;
+$header_height : 50px;
+
+.header{
+    height: $header_height;
+    background-color: #3c434d;
+}
+
+#left-menu{
+     position: fixed;
+     top : 0; right: 0; bottom: 0; left: 0;
+     width: $left;
+     background-color: #2c343f;
+     color: #fff;
+
+     .header{
+         display: flex;
+         align-items: center;
+         padding-left: 30px;
+     }
+
+     .nav-menu{
+         color: #fff;
+         list-style: none;
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         -webkit-padding-start : 0;
+
+         padding: 5px 0;
+         >li{
+             color: rgba(255,255,255,0.4);
+             padding: 5px 10px 5px 30px;
+             &:hover,&.active{
+                 color: #fff;
+                 cursor: pointer;
+
+
+                 a{
+                    color: #fff;
+                }
+             }
+
+             a{
+                 color: rgba(255,255,255,0.4);
+                 text-decoration: none;
+             }
+
+             &.open{
+                 .nav-menu-sub{
+                     display: block;
+                 }
+             }
+
+             .nav-menu-sub{
+                 display: none;
+             }
+         }
+
+
+         .nav-menu-sub{
+             list-style: none;
+             color: rgba(255,255,255,0.4);
+             background-color: rgba(0,0,0,0.15);
+             -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-padding-start : 0;
+             >li{
+                 padding: 5px 5px 5px 20px;
+                 &:hover{
+                     color: #fff;
+                     cursor: pointer;
+                 }
+             }
+         }
+     }
+}
+
+#main-container{
+    padding: 5px;
+    position: relative;
+    left: $left;
+    width: calc(100% - 230px);
+    .header{
+        background-color: #fff;
+        
+        
+
+        
+    }
+}
+
+
+.title{
+    color: #2c343f;
+    font-weight: bold;
+}

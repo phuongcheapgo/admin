@@ -1,6 +1,6 @@
 {
-  "name": "fuse",
-  "version": "1.4.0",
+  "name": "cheapgo-admin",
+  "version": "1.0.0",
   "dependencies": {},
   "scripts": {
     "test": "gulp test"
