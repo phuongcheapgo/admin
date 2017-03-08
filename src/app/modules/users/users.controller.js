@@ -9,8 +9,49 @@
     angular.module('app').controller('users.controller',controller);
 
     /** @ngInject */
-    function controller($scope){
+    function controller($scope, usersAPI, $state){
         console.log('users controller');
+
+        $scope.listItems = {};
+
+        $scope.editAction = editAction;
+
+        /** Internal functions */
+
+        (function onInit(){
+            getRiders();
+            getDrivers();
+        })();
+
+
+        function getList(type){
+            var params = {
+                type : type
+            };
+
+            usersAPI.getUsers(params).then(function(res){
+                try {
+                    $scope.listItems[type] = res.data.rows;
+                } catch (error) {
+                    
+                }
+                
+            });
+        }
+
+
+        function getRiders(){
+            return getList('rider');
+        }
+
+        function getDrivers(){
+            return getList('driver');
+        }
+
+
+        function editAction(id){
+            $state.go('app.user_add',{id : id});
+        }
     }
 
 })();
