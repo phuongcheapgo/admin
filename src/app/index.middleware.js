@@ -6,10 +6,10 @@
 (function(){
     'use strict';
 
-    angular.module('app').config(config);
+    angular.module('app').config(configMiddleware);
 
     /** @ngInject **/
-    function config($middlewareProvider){
+    function configMiddleware($middlewareProvider, $localStorageProvider){
         $middlewareProvider.map({
 
             /** Don't allow anyone through */
@@ -23,7 +23,9 @@
             },
 
             'auth': function everyoneMiddleware() {
-                
+                if($localStorageProvider.get('AUTHENTICATE_TOKEN')) {
+                    this.next();
+                }
                 this.redirectTo('login');
             },
 

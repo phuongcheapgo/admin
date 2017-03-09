@@ -4,14 +4,14 @@
             Sign in System
         </div>
         <div class="form-group">
-            <input type="email" class="form-control customize" placeholder="Email" ng-model="formData.email" required="" style="">
+            <input type="text" class="form-control customize" placeholder="Username" ng-model="formData.username">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control customize" placeholder="Password" ng-model="formData.password" required="" style="">
+            <input type="password" class="form-control customize" placeholder="Password" ng-model="formData.password">
         </div>
         
         <div class="form-group clearfix">
-            <button ng-disabled="formSignIn.$invalid" class="btn btn-default btn-sign-in pull-left" type="submit" ng-click="loginAction(formData)">SIGN IN</button>
+            <button ng-disabled="formSignIn.$invalid" class="btn btn-default btn-sign-in pull-left" type="submit" ng-click="signIn(formData)">SIGN IN</button>
             <a ui-sref="login.forgot" class="btn btn-link pull-right" style="padding: 12px 0;" href="#/login/forgot">Forgot Your Password</a>
         </div>
         

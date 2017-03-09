@@ -16,24 +16,25 @@
         
         // State definitions
         $stateProvider
-            .state('app.users', {
-                url: '/users',
-                controller : 'users.controller',
-                templateUrl: 'app/modules/users/views/users.list.html',
+            .state('app.account', {
+                url: '/account',
+                controller : 'account.controller',
+                templateUrl: 'app/modules/account/views/account.list.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
                 middleware: ['auth']
             })
-            .state('app.user_add', {
-                url: '/user_add/:id',
+
+            .state('app.account-add', {
+                url: '/account-add/:id',
                 params : {
-                    id : null,
-                    squash: true
+                    id : null
                 },
-                controller : 'users.add.controller',
-                templateUrl: 'app/modules/users/views/users.add.html',
+                controller : 'account.add.controller',
+                templateUrl: 'app/modules/account/views/account.add.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
                 middleware: ['auth']
             })
+            
     }
 
 })();

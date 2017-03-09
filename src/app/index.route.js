@@ -22,7 +22,8 @@
                 // abstract: true,
                 templateUrl: 'app/views/layout.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
-                controller : 'index.controller'
+                controller : 'index.controller',
+                middleware: ['auth']
             })
     }
 

@@ -1,0 +1,33 @@
+<div>
+    <div class="title" style="padding: 20px 0;">
+        ADMIN ACCOUNT MANAGEMENT
+        <button class="btn btn-primary btn-xs" type="button" ng-click="goAdd()">Add</button>
+    </div>
+
+
+    <div>
+
+   
+
+    <table class="table table-hover" style="margin-top: 20px;">
+                <tr>
+                    <th>Username</th>
+                    <th>Permission</th>
+                    <!--<th style="width: 150px;">Action</th>-->
+                </tr>
+
+                <tr ng-repeat="item in items">
+                    <td>{{::item.username}}</td>
+                    <td>{{::item.permission.toString()}}</td>
+                    <!--<td>
+                        <button class="btn btn-default btn-xs" type="button" ng-click="editAction(item._id)">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </button>
+                        <button class="btn btn-danger btn-xs" type="button">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>-->
+                </tr>
+            </table>
+    
+</div>

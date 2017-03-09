@@ -19,6 +19,12 @@
             
         </li>
 
+        <li ui-sref-active="active">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+            <a ui-sref="app.account">Admin Account</a>
+            
+        </li>
+
         <!--<li ui-sref-active="active">
             <i class="fa fa-car" aria-hidden="true"></i>
             <a ui-sref="app.driver-types">Driver Types</a>
@@ -46,12 +52,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, Admin <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {{USER_DATA.username}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:void(0)">Change Password</a></li>
                         
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Sign Out</a></li>
+                        <li><a href="javascript:void(0)" ng-click="signOut()">Sign Out</a></li>
                     </ul>
                     </li>
                 </ul>

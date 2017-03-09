@@ -21,6 +21,7 @@
                 controller : 'drivers.controller',
                 templateUrl: 'app/modules/drivers/views/drivers.list.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
+                middleware: ['auth']
             })
             .state('app.drivers_add', {
                 url: '/drivers_add/:id',
@@ -30,6 +31,7 @@
                 controller : 'drivers.add.controller',
                 templateUrl: 'app/modules/drivers/views/drivers.add.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
+                middleware: ['auth']
             })
     }
 
