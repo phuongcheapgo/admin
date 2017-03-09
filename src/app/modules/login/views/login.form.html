@@ -1,19 +1,59 @@
-<div id="login">
-    <form class="form-sign-in" name="formSignIn" novalidate="">
-        <div class="title">
-            Sign in System
+<div class="content overflow-hidden">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                    <!-- Login Block -->
+                    <div class="block block-themed animated fadeIn">
+                        <div class="block-header bg-primary">
+                            
+                            <h3 class="block-title">Login</h3>
+                        </div>
+                        <div class="block-content block-content-full block-content-narrow">
+                            <!-- Login Title -->
+                            <h1 class="h2 font-w600 push-30-t push-5">
+                                CHEAP GO MANAGEMENT
+                            </h1>
+                            
+                            <!-- END Login Title -->
+
+                            <!-- Login Form -->
+                            <!-- jQuery Validation (.js-validation-login class is initialized in js/pages/base_pages_login.js) -->
+                            <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                            <form class="js-validation-login form-horizontal push-30-t push-50"  name="formSignIn" novalidate>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="form-material form-material-primary floating">
+                                            <input class="form-control" type="text" id="login-username" name="login-username" ng-model="formData.username">
+                                            <label for="login-username">Username</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="form-material form-material-primary floating">
+                                            <input class="form-control" type="password" id="login-password" name="login-password" ng-model="formData.password">
+                                            <label for="login-password">Password</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label class="css-input switch switch-sm switch-primary">
+                                            <input type="checkbox" id="login-remember-me" name="login-remember-me"><span></span> Remember Me?
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <button class="btn btn-block btn-primary" type="submit" ng-disabled="formSignIn.$invalid" ng-click="signIn(formData)">
+                                            <i class="si si-login pull-right"></i> Log in
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- END Login Form -->
+                        </div>
+                    </div>
+                    <!-- END Login Block -->
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <input type="text" class="form-control customize" placeholder="Username" ng-model="formData.username">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control customize" placeholder="Password" ng-model="formData.password">
-        </div>
-        
-        <div class="form-group clearfix">
-            <button ng-disabled="formSignIn.$invalid" class="btn btn-default btn-sign-in pull-left" type="submit" ng-click="signIn(formData)">SIGN IN</button>
-            <a ui-sref="login.forgot" class="btn btn-link pull-right" style="padding: 12px 0;" href="#/login/forgot">Forgot Your Password</a>
-        </div>
-        
-    </form>
-</div>

@@ -14,6 +14,9 @@
 
         $scope.signOut = signOut;
 
+        $scope.sidebarToggle = sidebarToggle;
+        $scope.sidebarClose = sidebarClose;
+
 
         $scope.USER_DATA = $localStorage.USER_DATA
 
@@ -26,6 +29,14 @@
                 $state.go('login');
             },500);
 
+        }
+
+        function sidebarToggle(){
+            $('#page-container').toggleClass('sidebar-o-xs');
+        }
+
+        function sidebarClose(){
+            $('#page-container').removeClass('sidebar-o-xs');
         }
     }
 })();
