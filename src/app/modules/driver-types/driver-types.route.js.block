@@ -1,6 +1,6 @@
 /**
  * Author : phuong.tran
- * Date   : 2017-03-07
+ * Date   : 2017-03-09
  */
 
 (function (){
@@ -16,21 +16,22 @@
         
         // State definitions
         $stateProvider
-            .state('app.drivers', {
-                url: '/drivers',
-                controller : 'drivers.controller',
-                templateUrl: 'app/modules/drivers/views/drivers.list.html',
+            .state('app.driver-types', {
+                url: '/driver-types',
+                controller : 'driver-types.controller',
+                templateUrl: 'app/modules/driver-types/views/driver-types.list.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
             })
-            .state('app.drivers_add', {
-                url: '/drivers_add/:id',
+            .state('app.driver-types-add', {
+                url: '/driver-types-add/:id',
                 params : {
                     id : null
                 },
-                controller : 'drivers.add.controller',
-                templateUrl: 'app/modules/drivers/views/drivers.add.html',
+                controller : 'driver-types.add.controller',
+                templateUrl: 'app/modules/driver-types/views/driver-types.add.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
             })
+            
     }
 
 })();

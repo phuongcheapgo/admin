@@ -1,54 +1,61 @@
 /**
  * Author : phuong.tran
- * Date   : 2017-03-08
+ * Date   : 2017-03-09
  */
 
 (function(){
     'use strict';
 
-
-    angular.module('app').controller('users.add.controller',controller);
+    angular.module('app').controller('drivers.add.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, $stateParams, usersAPI){
+    function controller($scope, drivesAPI, $state, $stateParams){
+        console.log('drivers controller');
 
         $scope.saveAction = saveAction;
 
+
         (function onInit(){
+            getDriverType();
             getFormData();
         })();
+
+        function getDriverType(){
+            drivesAPI.getDriverType().then(function(res){
+                try {
+                    $scope.driverTypes = res.data.rows;
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        }
 
 
         function getFormData(){
             var id = $stateParams.id;
-
             if(id)
             {
-                usersAPI.getUserDetail(id).then(function(res){
+                drivesAPI.getDriverDetail(id).then(function(res){
                     try {
-                        console.log(res);
                         $scope.formData = res.data.result;
                     } catch (error) {
-                        
+                        console.log(error);
                     }
                 });
             }
             else
             {
-                $scope.formData = {
-                    gender : 0,
-                    type : 'rider'
-                };
+                $scope.formData = {};
             }
         }
 
         function saveAction(data){
+            console.log(data);
+
             var id = $stateParams.id;
-            var params = parseParams(data);
             if(id)
             {
-                usersAPI.updateUser(id,params).then(function(res){
-                    
+                drivesAPI.updateDriver(id, data).then(function(res){
                     try {
                         if(res.data.success)
                         {
@@ -57,7 +64,7 @@
                                 showConfirmButton: true,
                                 type : 'success'
                             },function(){
-                                $state.go('app.users');
+                                $state.go('app.drivers');
                             });
                         }
                     } catch (error) {
@@ -67,10 +74,7 @@
             }
             else
             {
-                
-                usersAPI.addUser(params).then(function(res){
-                    console.log(res);
-
+                drivesAPI.addDriver(data).then(function(res){
                     try {
                         if(res.data.success)
                         {
@@ -79,27 +83,14 @@
                                 showConfirmButton: true,
                                 type : 'success'
                             },function(){
-                                $state.go('app.users');
+                                $state.go('app.drivers');
                             });
                         }
                     } catch (error) {
-                        
+                        console.log(error);
                     }
                 });
             }
-
-        }
-
-        function parseParams(object){
-            var params = {
-                email : object.email,
-                first_name : object.first_name,
-                last_name : object.last_name,
-                gender : object.gender,
-                type : object.type
-            };
-
-            return params;
         }
     }
 })();

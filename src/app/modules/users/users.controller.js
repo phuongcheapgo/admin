@@ -15,6 +15,7 @@
         $scope.listItems = {};
 
         $scope.editAction = editAction;
+        $scope.goAdd = goAdd;
 
         /** Internal functions */
 
@@ -51,6 +52,10 @@
 
         function editAction(id){
             $state.go('app.user_add',{id : id});
+        }
+
+        function goAdd(){
+            $state.go('app.user_add',{id : null});
         }
     }
 

@@ -7,6 +7,9 @@
      */
     angular
         .module('app', [
-            'ui.router'
+            'ngResource',
+            'ui.router',
+            'ui.router.middleware'
+            
         ]);
 })();
