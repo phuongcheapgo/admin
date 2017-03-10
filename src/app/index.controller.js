@@ -16,6 +16,7 @@
 
         $scope.sidebarToggle = sidebarToggle;
         $scope.sidebarClose = sidebarClose;
+        $scope.toggleHeaderSearch = toggleHeaderSearch;
 
 
         $scope.USER_DATA = $localStorage.USER_DATA
@@ -37,6 +38,10 @@
 
         function sidebarClose(){
             $('#page-container').removeClass('sidebar-o-xs');
+        }
+
+        function toggleHeaderSearch(){
+            $('.js-header-search').toggleClass('header-search-xs-visible');
         }
     }
 })();

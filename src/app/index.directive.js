@@ -78,7 +78,7 @@ App.directive('jsMainNav', function () {
 
             // On state change success event, hide the sidebar in mobile devices
             scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-                // scope.oneui.settings.sidebarOpenXs = false;
+                $('#page-container').removeClass('sidebar-o-xs');
             });
         }
     };
