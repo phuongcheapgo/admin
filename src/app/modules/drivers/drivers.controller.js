@@ -9,10 +9,10 @@
     angular.module('app').controller('drivers.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, drivesAPI){
+    function controller($scope, $state, drivesAPI, CONFIG){
         console.log('drivers controller');
 
-        $scope.HOST_API = '//localhost:5050/';
+        $scope.HOST_API = CONFIG.HOST_API + '/';
         $scope.goEdit = goEdit;
 
         $scope.goAdd = goAdd;

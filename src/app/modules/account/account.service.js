@@ -9,8 +9,8 @@
     angular.module('app').service('accountAPI',service);
 
     /** @ngInject */
-    function service($http){
-        var HOST_API = '//localhost:5050';
+    function service($http, CONFIG){
+        var HOST_API = CONFIG.HOST_API;
 
         this.getAccountList = getAccountList;
         this.addAccount = addAccount;

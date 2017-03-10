@@ -8,8 +8,8 @@
 
     angular.module('app').service('loginAPI',service);
 
-    function service($http){
-        var HOST_API = '//localhost:5050';
+    function service($http, CONFIG){
+        var HOST_API = CONFIG.HOST_API;
 
         this.signIn = signIn;
 
