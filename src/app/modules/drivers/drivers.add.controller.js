@@ -13,7 +13,7 @@
         console.log('drivers controller');
 
         $scope.saveAction = saveAction;
-
+        $scope.cancelAction = cancelAction;
 
         (function onInit(){
             getDriverType();
@@ -50,7 +50,7 @@
         }
 
         function saveAction(data){
-            console.log(data);
+            
 
             var id = $stateParams.id;
             if(id)
@@ -91,6 +91,10 @@
                     }
                 });
             }
+        }
+
+        function cancelAction(){
+            $state.go('app.drivers');
         }
     }
 })();

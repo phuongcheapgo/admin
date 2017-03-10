@@ -11,6 +11,7 @@
     /** @ngInject */
     function controller($scope, $state, $stateParams, accountAPI){
         $scope.saveAction = saveAction;
+        $scope.cancelAction = cancelAction;
 
 
 
@@ -40,6 +41,10 @@
                 }
             });
 
+        }
+
+        function cancelAction(){
+            $state.go('app.account');
         }
     }
 })();

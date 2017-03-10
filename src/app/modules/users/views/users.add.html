@@ -1,58 +1,61 @@
-<div class="title">
+<div class="block-header bg-gray-lighter" style="margin-bottom: 20px;">
+  <div class="block-title text-center">
     <span ng-if="$stateParams.id">EDIT USER</span>
     <span ng-if="!$stateParams.id">CREATE USER</span>
+  </div>
 </div>
 
-<form name="form">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" ng-model="formData.email">
-  </div>
-  <div class="form-group">
-    <label for="first_name">First Name</label>
-    <input type="text" class="form-control" id="first_name" ng-model="formData.first_name">
-  </div>
-
-  <div class="form-group">
-    <label for="last_name">Last Name</label>
-    <input type="text" class="form-control" id="last_name" ng-model="formData.last_name">
-  </div>
-
-  <div class="form-group">
-    <label for="last_name">Gender</label>
-    <div class="radio">
-        <label>
-            <input type="radio" value="0" ng-model="formData.gender">
-            Male
-        </label>
-        </div>
-        <div class="radio">
-        <label>
-            <input type="radio" value="1" ng-model="formData.gender">
-            Female
-        </label>
+<div class="row">
+  <form name="form" class="col-sm-6 col-sm-offset-3">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" ng-model="formData.email" required>
     </div>
-  </div>
-
-  <div class="form-group">
-    <label for="last_name">Type</label>
-    <div class="radio">
-        <label>
-            <input type="radio" value="rider" ng-model="formData.type">
-            Rider
-        </label>
-        </div>
-        <div class="radio">
-        <label>
-            <input type="radio" value="driver" ng-model="formData.type">
-            Drivers
-        </label>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" ng-model="formData.password" ng-required="!$stateParams.id">
     </div>
-  </div>
-  
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary" ng-click="saveAction(formData)">Submit</button>
-  </div>
-  
-  
-</form>
+    <div class="form-group">
+      <label for="first_name">First Name</label>
+      <input type="text" class="form-control" id="first_name" ng-model="formData.first_name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input type="text" class="form-control" id="last_name" ng-model="formData.last_name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">Gender</label>
+
+      <div>
+        <label class="css-input css-radio css-radio-lg css-radio-primary push-10-r">
+            <input type="radio" ng-model="formData.gender" value="0"><span></span> Male
+      </label>
+        <label class="css-input css-radio css-radio-lg css-radio-primary push-10-r">
+            <input type="radio" ng-model="formData.gender" value="1"><span></span> Female
+      </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">Type</label>
+
+      <div>
+        <label class="css-input css-radio css-radio-lg css-radio-primary push-10-r">
+            <input type="radio" ng-model="formData.type" value="rider"><span></span> Rider
+      </label>
+        <label class="css-input css-radio css-radio-lg css-radio-primary push-10-r">
+            <input type="radio" ng-model="formData.type" value="driver"><span></span> Drivers
+      </label>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="saveAction(formData)">Submit</button>
+      <button type="button" class="btn btn-default" ng-click="cancelAction()">Cancel</button>
+    </div>
+
+
+  </form>
+</div>

@@ -13,6 +13,7 @@
     function controller($scope, $state, $stateParams, usersAPI){
 
         $scope.saveAction = saveAction;
+        $scope.cancelAction = cancelAction;
 
         (function onInit(){
             getFormData();
@@ -26,10 +27,11 @@
             {
                 usersAPI.getUserDetail(id).then(function(res){
                     try {
-                        console.log(res);
-                        $scope.formData = res.data.result;
-                    } catch (error) {
                         
+                        $scope.formData = res.data.result;
+                        delete $scope.formData.password;
+                    } catch (error) {
+                        console.log(error);
                     }
                 });
             }
@@ -96,10 +98,16 @@
                 first_name : object.first_name,
                 last_name : object.last_name,
                 gender : object.gender,
-                type : object.type
+                type : object.type,
             };
 
+            if(object.password) params.password = object.password;
+
             return params;
+        }
+
+        function cancelAction(){
+            $state.go('app.users');
         }
     }
 })();

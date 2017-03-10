@@ -17,6 +17,8 @@
         $scope.editAction = editAction;
         $scope.goAdd = goAdd;
 
+        $scope.deleteAction = deleteAction;
+
         /** Internal functions */
 
         (function onInit(){
@@ -56,6 +58,39 @@
 
         function goAdd(){
             $state.go('app.user_add',{id : null});
+        }
+
+        function deleteAction(id){
+            swal(
+                {
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this user!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: true
+                },
+                function(){
+                    usersAPI.deleteUser(id).then(function(res){
+                        try {
+                            if(res.data.success)
+                            {
+                                getRiders();
+                                getDrivers();
+                                swal({
+                                    title: res.data.msg,
+                                    showConfirmButton: true,
+                                    type : 'success'
+                                });
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    });
+                    
+                }
+            );
         }
     }
 
