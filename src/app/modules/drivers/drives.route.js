@@ -26,7 +26,8 @@
             .state('app.drivers_add', {
                 url: '/drivers_add/:id',
                 params : {
-                    id : null
+                    id : null,
+                    squash: true
                 },
                 controller : 'drivers.add.controller',
                 templateUrl: 'app/modules/drivers/views/drivers.add.html',

@@ -27,7 +27,8 @@
             .state('app.account-add', {
                 url: '/account-add/:id',
                 params : {
-                    id : null
+                    id : null,
+                    squash: true
                 },
                 controller : 'account.add.controller',
                 templateUrl: 'app/modules/account/views/account.add.html',
