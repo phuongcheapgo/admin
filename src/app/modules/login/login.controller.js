@@ -17,6 +17,8 @@
 
         /** Internal functions */
         function signIn(data){
+          $('.alert').removeClass('in');
+
             var params = {
                 username : data.username,
                 password : data.password
@@ -32,9 +34,9 @@
                     },500);
 
                 } catch (error) {
-                    console.log(error);
+                    $('.alert').addClass('in');
                 }
-                
+
             });
         }
     }
