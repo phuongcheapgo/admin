@@ -653,4 +653,18 @@ App.directive('jsSimplemde', function () {
     };
 });
 
+
+App.directive('imgLightbox',function(){
+    return {
+        link: function (scope, element, attrs) {
+            element.magnificPopup({
+                items: {
+                    src: attrs.ngSrc
+                },
+                type: 'image' // this is default type
+            });
+        }
+    }
+});
+
 })();

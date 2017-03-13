@@ -1,5 +1,5 @@
 <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
-            
+
             <!-- Sidebar -->
             <nav id="sidebar">
                 <!-- Sidebar Scroll Container -->
@@ -14,7 +14,7 @@
                                 <i class="fa fa-times"></i>
                             </button>
                             <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
-                            
+
                             <a class="h5 text-white" href="start_backend.html">
                                 <span class="h4 font-w600 sidebar-mini-hide">CHEAPGO</span>
                             </a>
@@ -46,7 +46,14 @@
                                         <span class="sidebar-mini-hide">Admin Account</span>
                                     </a>
                                 </li>
-                                
+
+                                <li>
+                                    <a ui-sref-active="active" ui-sref="app.vehicle-document">
+                                      <i class="fa fa-file-text" aria-hidden="true"></i>
+                                      <span class="sidebar-mini-hide">Vehicle Documents</span>
+                                    </a>
+                                </li>
+
                                 <!--<li class="open">
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
                                     <ul>
@@ -70,7 +77,7 @@
 
             <!-- Header -->
             <header id="header-navbar" class="content-mini content-mini-full">
-                
+
                 <!-- Header Navigation Left -->
                 <ul class="nav-header pull-left">
                     <li class="hidden-md hidden-lg">
@@ -79,7 +86,7 @@
                             <i class="fa fa-navicon"></i>
                         </button>
                     </li>
-                    
+
                     <li class="visible-xs">
                         <!-- Toggle class helper (for .js-header-search below), functionality initialized in App() -> uiToggleClass() -->
                         <button class="btn btn-default" type="button" ng-click="toggleHeaderSearch()">
@@ -119,14 +126,14 @@
                             </ul>
                         </div>
                     </li>
-                    
+
                 </ul>
             </header>
             <!-- END Header -->
 
             <!-- Main Container -->
             <main id="main-container" style="min-height: 452px;">
-                
+
                 <!-- Page Content -->
                 <div class="content">
                     <!-- My Block -->
@@ -144,4 +151,3 @@
 
 
 
-        
