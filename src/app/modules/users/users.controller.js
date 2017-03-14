@@ -19,6 +19,8 @@
 
         $scope.deleteAction = deleteAction;
 
+        $scope.changeActivation = changeActivation;
+
         /** Internal functions */
 
         (function onInit(){
@@ -36,9 +38,9 @@
                 try {
                     $scope.listItems[type] = res.data.rows;
                 } catch (error) {
-                    
+
                 }
-                
+
             });
         }
 
@@ -88,9 +90,28 @@
                             console.log(error);
                         }
                     });
-                    
+
                 }
             );
+        }
+
+
+        function changeActivation(id,status) {
+
+            usersAPI.changeActivation(id,{status : status}).then(function (res) {
+                try {
+                    if(res.data.success)
+                    {
+                        swal({
+                            title: res.data.msg,
+                            showConfirmButton: true,
+                            type : 'success'
+                        });
+                    }
+                } catch (e){
+                    console.log(e);
+                }
+            });
         }
     }
 

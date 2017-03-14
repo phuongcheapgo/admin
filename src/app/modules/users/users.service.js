@@ -17,6 +17,7 @@
         this.addUser = addUser;
         this.updateUser = updateUser;
         this.deleteUser = deleteUser;
+        this.changeActivation = changeActivation;
 
         function getUsers(params){
 
@@ -42,6 +43,11 @@
         function deleteUser(id){
             var url = [HOST_API,'api/admin/users/delete',id].join('/');
             return $http.delete(url);
+        }
+
+        function changeActivation(id,params) {
+            var url = [HOST_API,'api/admin/users/update-activation',id].join('/');
+            return $http.put(url,params);
         }
     }
 })();
