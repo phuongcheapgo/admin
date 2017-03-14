@@ -27,7 +27,7 @@
             {
                 usersAPI.getUserDetail(id).then(function(res){
                     try {
-                        
+
                         $scope.formData = res.data.result;
                         delete $scope.formData.password;
                     } catch (error) {
@@ -50,7 +50,7 @@
             if(id)
             {
                 usersAPI.updateUser(id,params).then(function(res){
-                    
+
                     try {
                         if(res.data.success)
                         {
@@ -69,7 +69,7 @@
             }
             else
             {
-                
+
                 usersAPI.addUser(params).then(function(res){
                     console.log(res);
 
@@ -85,7 +85,7 @@
                             });
                         }
                     } catch (error) {
-                        
+                        console.log(error);
                     }
                 });
             }
