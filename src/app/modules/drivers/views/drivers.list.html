@@ -16,6 +16,7 @@
                 <th>Price/Km</th>
                 <th>Open Door Price</th>
                 <th>Image</th>
+                <th>Document</th>
                 <th>Status</th>
                 <th style="width: 100px;">Action</th>
             </tr>
@@ -28,6 +29,28 @@
                 <td>{{::item.open_door_price | number}}</td>
                 <td>
                     <img ng-src="{{HOST_API + item.detail.image}}" alt="" height="40">
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-xs dropdown-toggle"
+                                ng-class="{'btn-info' : item.documents.length == DOCUMENT_TYPE_ARRAY.length, 'btn-warning' : item.documents.length < DOCUMENT_TYPE_ARRAY.length}"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{::item.documents.length}}/{{DOCUMENT_TYPE_ARRAY.length}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 300px;">
+                            <li ng-repeat="doc in DOCUMENT_TYPE_ARRAY">
+                                <a role="button">
+                                    <span class="pull-right">
+                                        <i ng-if="item.document_types.indexOf(doc.VALUE) > -1" class="fa fa-check-circle text-success" aria-hidden="true"></i>
+                                        <i ng-if="item.document_types.indexOf(doc.VALUE) == -1" class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
+                                    </span>
+                                    {{doc.NAME}}
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
                 </td>
                 <td>
                     <label class="css-input switch switch-sm switch-primary" for="{{$index}}">

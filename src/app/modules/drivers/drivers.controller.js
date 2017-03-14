@@ -9,8 +9,13 @@
     angular.module('app').controller('drivers.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, drivesAPI, CONFIG){
-        console.log('drivers controller');
+    function controller($scope, $state, drivesAPI, CONFIG, DOCUMENT_CONFIG){
+        $scope.DOCUMENT_TYPE_ARRAY =  Object.keys(DOCUMENT_CONFIG.TYPE).map(function(key){
+            var item = DOCUMENT_CONFIG.TYPE[key];
+            return item;
+        });
+
+        console.log($scope.DOCUMENT_TYPE_ARRAY);
 
         $scope.HOST_API = CONFIG.HOST_API + '/';
         $scope.goEdit = goEdit;
@@ -32,10 +37,13 @@
 
                     $scope.items = $scope.items.map(function(item){
                         item.detail = getVehicleType(res.data.types,item.vehicle_type_id);
+                        item.document_types = item.documents.map(function (_doc) {
+                            return _doc.type;
+                        });
                         return item;
                     });
                 } catch (error) {
-                    
+                    console.log(error);
                 }
             });
         }
@@ -108,6 +116,6 @@
             });
         }
 
-        
+
     }
 })();
