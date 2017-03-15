@@ -24,7 +24,7 @@
             var id = $stateParams.id;
             if(id)
             {
-                driverTypesAPI.getDeriverTypeDetail(id).then(function(res){
+                driverTypesAPI.getDriverTypeDetail(id).then(function(res){
                     try {
                         $scope.formData = res.data.result;
                     } catch (error) {
@@ -61,7 +61,7 @@
                         }
                     } catch (error) {
                         console.log(error);
-                    }   
+                    }
                 });
             }
         }

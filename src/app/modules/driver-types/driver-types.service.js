@@ -8,13 +8,13 @@
     'use strict';
 
     angular.module('app').service('driverTypesAPI',service);
-    
+
     /** @ngInject */
-    function service($http){
-        var HOST_API = '//localhost:5050';
+    function service($http, CONFIG){
+        var HOST_API = CONFIG.HOST_API;
         this.getDriverType = getDriverType;
         this.addDriverType = addDriverType;
-        this.getDeriverTypeDetail = getDeriverTypeDetail;
+        this.getDriverTypeDetail = getDriverTypeDetail;
 
         /** Internal functions */
 
@@ -28,7 +28,7 @@
             return $http.post(url,params);
         }
 
-        function getDeriverTypeDetail(id,params){
+        function getDriverTypeDetail(id,params){
             var url = [HOST_API,'api/admin/vehicle-type/detail',id].join('/');
             return $http.get(url,{params : params });
         }

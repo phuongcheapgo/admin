@@ -14,6 +14,7 @@
                 <th>Brand</th>
                 <th>Price/Km</th>
                 <th>Open Door Price</th>
+                <th>Image</th>
                 <th>Document</th>
                 <th>Status</th>
                 <th style="width: 100px;">Action</th>
@@ -24,6 +25,9 @@
                 <td>{{::_item.brand}}</td>
                 <td>{{::_item.price_per_km | number}}</td>
                 <td>{{::_item.open_door_price | number}}</td>
+                <td>
+                    <img ng-src="{{ ['http://node.cheapgo.com:5050',_item.type.image].join('/') }}" alt="">
+                </td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-xs dropdown-toggle"

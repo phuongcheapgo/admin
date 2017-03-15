@@ -9,7 +9,7 @@
     angular.module('app').controller('drivers.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, drivesAPI, usersAPI, CONFIG, DOCUMENT_CONFIG){
+    function controller($scope, $state, drivesAPI, usersAPI, driverTypesAPI, CONFIG, DOCUMENT_CONFIG){
         $scope.DOCUMENT_TYPE_ARRAY =  Object.keys(DOCUMENT_CONFIG.TYPE).map(function(key){
             var item = DOCUMENT_CONFIG.TYPE[key];
             return item;
@@ -194,9 +194,20 @@
                         return _doc.type;
                     });
 
+                    driverTypesAPI.getDriverTypeDetail(vehicle.vehicle_type_id).then(function(res){
+                        try {
+                            vehicle.type = res.data.result;
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    });
+
+
                     if(!angular.isArray(vehicle)){
                         item.vehicle = [vehicle];
                     }
+
+
 
                 }
                 else
