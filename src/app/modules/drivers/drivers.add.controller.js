@@ -9,7 +9,7 @@
     angular.module('app').controller('drivers.add.controller',controller);
 
     /** @ngInject */
-    function controller($scope, drivesAPI, $state, $stateParams){
+    function controller($scope, drivesAPI, usersAPI, $state, $stateParams){
         console.log('drivers controller');
 
         $scope.saveAction = saveAction;
@@ -18,6 +18,7 @@
         (function onInit(){
             getDriverType();
             getFormData();
+            getUserDetail();
         })();
 
         function getDriverType(){
@@ -33,6 +34,7 @@
 
         function getFormData(){
             var id = $stateParams.id;
+
             if(id)
             {
                 drivesAPI.getDriverDetail(id).then(function(res){
@@ -50,7 +52,8 @@
         }
 
         function saveAction(data){
-            
+
+            data.user_id = $scope.userData._id;
 
             var id = $stateParams.id;
             if(id)
@@ -95,6 +98,17 @@
 
         function cancelAction(){
             $state.go('app.drivers');
+        }
+
+        function getUserDetail() {
+            var user_id = $stateParams.user;
+            usersAPI.getUserDetail(user_id).then(function (res) {
+                try{
+                    $scope.userData = res.data.result;
+                }catch (e){
+
+                }
+            });
         }
     }
 })();

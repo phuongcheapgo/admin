@@ -9,13 +9,12 @@
     angular.module('app').controller('drivers.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, drivesAPI, CONFIG, DOCUMENT_CONFIG){
+    function controller($scope, $state, drivesAPI, usersAPI, CONFIG, DOCUMENT_CONFIG){
         $scope.DOCUMENT_TYPE_ARRAY =  Object.keys(DOCUMENT_CONFIG.TYPE).map(function(key){
             var item = DOCUMENT_CONFIG.TYPE[key];
             return item;
         });
 
-        console.log($scope.DOCUMENT_TYPE_ARRAY);
 
         $scope.HOST_API = CONFIG.HOST_API + '/';
         $scope.goEdit = goEdit;
@@ -24,9 +23,14 @@
 
         $scope.deleteAction = deleteAction;
         $scope.changeStatus = changeStatus;
+        $scope.changeActivation = changeActivation;
+        $scope.deleteUserAction = deleteUserAction;
+        $scope.loadDrivers = loadDrivers;
+        $scope.editUserAction = editUserAction;
 
         (function onInit(){
             getList();
+            getUserDrivers();
         })();
 
 
@@ -59,12 +63,13 @@
             return result;
         }
 
-        function goEdit(id){
-            $state.go('app.drivers_add',{id : id});
+        function goEdit(user,id){
+
+            $state.go('app.drivers_add',{id : id, user : user});
         }
 
-        function goAdd(){
-            $state.go('app.drivers_add',{id : null});
+        function goAdd(user){
+            $state.go('app.drivers_add',{id : null, user : user});
         }
 
         function deleteAction(id){
@@ -114,6 +119,100 @@
                     console.log(error);
                 }
             });
+        }
+
+        function getUserDrivers() {
+            drivesAPI.getUserDrivers().then(function (res) {
+                console.log(res);
+                try{
+                    $scope.users = res.data.rows;
+                }catch (e){
+
+                }
+            });
+        }
+
+        function changeActivation(id,status) {
+
+            usersAPI.changeActivation(id,{status : status}).then(function (res) {
+                try {
+                    if(res.data.success)
+                    {
+                        swal({
+                            title: res.data.msg,
+                            showConfirmButton: true,
+                            type : 'success'
+                        });
+                    }
+                } catch (e){
+                    console.log(e);
+                }
+            });
+        }
+
+        function deleteUserAction(id) {
+            swal(
+                {
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this user!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: true
+                },
+                function(){
+                    usersAPI.deleteUser(id).then(function(res){
+                        try {
+                            if(res.data.success)
+                            {
+
+                                swal({
+                                    title: res.data.msg,
+                                    showConfirmButton: true,
+                                    type : 'success'
+                                },getUserDrivers);
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    });
+
+                }
+            );
+        }
+
+        function loadDrivers(item) {
+
+            if(!item.parse)
+            {
+                var vehicle = angular.copy(item.vehicle);
+
+                if(vehicle)
+                {
+                    vehicle.document_types = vehicle.documents.map(function (_doc) {
+                        return _doc.type;
+                    });
+
+                    if(!angular.isArray(vehicle)){
+                        item.vehicle = [vehicle];
+                    }
+
+                }
+                else
+                {
+                    item.vehicle = [];
+                }
+
+                item.parse = true;
+
+            }
+
+            item.show = !item.show;
+        }
+
+        function editUserAction(id) {
+            $state.go('app.user_add',{id : id});
         }
 
 

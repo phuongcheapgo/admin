@@ -2,47 +2,41 @@
     <div class="block-header">
         <ul class="block-options">
             <li title="Create New Driver">
-                <button type="button" ng-click="goAdd()"><i class="si si-plus"></i></button>
+                <button type="button" ng-click="goAdd(item._id)"><i class="si si-plus"></i></button>
             </li>
         </ul>
-        <h3 class="block-title">DRIVERS MANAGEMENT</h3>
+        <h3 class="block-title">VEHICLES</h3>
     </div>
     <div class="block-content table-responsive">
         <table class="table table-striped table-vcenter table-hover">
             <tr>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Type</th>
                 <th>Price/Km</th>
                 <th>Open Door Price</th>
-                <th>Image</th>
                 <th>Document</th>
                 <th>Status</th>
                 <th style="width: 100px;">Action</th>
             </tr>
 
-            <tr ng-repeat="item in items">
-                <td>{{::item.name}}</td>
-                <td>{{::item.brand}}</td>
-                <td>{{::item.detail.name}}</td>
-                <td>{{::item.price_per_km | number}}</td>
-                <td>{{::item.open_door_price | number}}</td>
-                <td>
-                    <img ng-src="{{HOST_API + item.detail.image}}" alt="" height="40">
-                </td>
+            <tr ng-repeat="_item in item.vehicle" ng-if="item.vehicle.length > 0">
+                <td>{{::_item.name}}</td>
+                <td>{{::_item.brand}}</td>
+                <td>{{::_item.price_per_km | number}}</td>
+                <td>{{::_item.open_door_price | number}}</td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-xs dropdown-toggle"
-                                ng-class="{'btn-info' : item.documents.length == DOCUMENT_TYPE_ARRAY.length, 'btn-warning' : item.documents.length < DOCUMENT_TYPE_ARRAY.length}"
+                                ng-class="{'btn-info' : _item.documents.length == DOCUMENT_TYPE_ARRAY.length, 'btn-warning' : _item.documents.length < DOCUMENT_TYPE_ARRAY.length}"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{::item.documents.length}}/{{DOCUMENT_TYPE_ARRAY.length}} <span class="caret"></span>
+                            {{::_item.documents.length}}/{{DOCUMENT_TYPE_ARRAY.length}} <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" style="width: 300px;">
                             <li ng-repeat="doc in DOCUMENT_TYPE_ARRAY">
                                 <a role="button">
                                     <span class="pull-right">
-                                        <i ng-if="item.document_types.indexOf(doc.VALUE) > -1" class="fa fa-check-circle text-success" aria-hidden="true"></i>
-                                        <i ng-if="item.document_types.indexOf(doc.VALUE) == -1" class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
+                                        <i ng-if="_item.document_types.indexOf(doc.VALUE) > -1" class="fa fa-check-circle text-success" aria-hidden="true"></i>
+                                        <i ng-if="_item.document_types.indexOf(doc.VALUE) == -1" class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
                                     </span>
                                     {{doc.NAME}}
                                 </a>
@@ -54,18 +48,21 @@
                 </td>
                 <td>
                     <label class="css-input switch switch-sm switch-primary" for="{{$index}}">
-                        <input type="checkbox" id="{{$index}}" ng-model="item.is_available" ng-change="changeStatus(item._id,item.is_available)">
+                        <input type="checkbox" id="{{$index}}" ng-model="_item.is_available" ng-change="changeStatus(_item._id,_item.is_available)">
                         <span></span>
                     </label>
                 </td>
                 <td>
-                    <button class="btn btn-default btn-xs" type="button" ng-click="goEdit(item._id)">
+                    <button class="btn btn-default btn-xs" type="button" ng-click="goEdit(item._id,_item._id)">
                     <i class="glyphicon glyphicon-pencil"></i>
                 </button>
-                    <button class="btn btn-danger btn-xs" type="button" ng-click="deleteAction(item._id)">
+                    <button class="btn btn-danger btn-xs" type="button" ng-click="deleteAction(_item._id)">
                     <i class="glyphicon glyphicon-trash"></i>
                 </button>
                 </td>
+            </tr>
+            <tr ng-if="item.vehicle.length === 0">
+                <td class="text-center" colspan="100%">No Data</td>
             </tr>
         </table>
     </div>

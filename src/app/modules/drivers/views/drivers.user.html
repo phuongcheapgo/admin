@@ -1,0 +1,54 @@
+<div class="block">
+    <div class="block-header">
+        <ul class="block-options">
+            <li title="Create New">
+                <button type="button" ng-click="goAdd()"><i class="si si-plus"></i></button>
+            </li>
+        </ul>
+        <h3 class="block-title">DRIVERS USER MANAGEMENT</h3>
+    </div>
+    <div class="block-content table-responsive">
+        <table class="table table-vcenter table-hover" style="margin-top: 20px;">
+            <tr>
+                <th>&nbsp;</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Active</th>
+                <th style="width: 150px;">Action</th>
+            </tr>
+
+            <tr ng-repeat-start="item in users" >
+                <td>
+                    <i ng-show="!item.show" class="glyphicon glyphicon-plus-sign"></i>
+                    <i ng-show="item.show" class="glyphicon glyphicon-minus-sign"></i>
+                </td>
+                <td role="button" ng-click="loadDrivers(item)">
+                    <a>{{::item.email}}</a>
+
+                </td>
+                <td>{{::item.first_name}}</td>
+                <td>{{::item.last_name}}</td>
+                <td>{{::item.phone}}</td>
+                <td>
+                    <label class="css-input switch switch-sm switch-primary" for="{{$index}}">
+                        <input type="checkbox" id="{{$index}}" ng-model="item.activation.is_activated" ng-change="changeActivation(item._id, item.activation.is_activated)">
+                        <span></span>
+                    </label>
+                </td>
+                <td>
+                    <button class="btn btn-default btn-xs" type="button" ng-click="editUserAction(item._id)">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+                    <button class="btn btn-danger btn-xs" type="button" ng-click="deleteUserAction(item._id)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-repeat-end="" ng-if="item.show">
+                <td colspan="100%" ng-include="'app/modules/drivers/views/drivers.list.html'"></td>
+            </tr>
+        </table>
+    </div>
+</div>

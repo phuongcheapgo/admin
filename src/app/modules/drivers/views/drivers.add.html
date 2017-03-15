@@ -7,6 +7,14 @@
 
 <div class="row">
   <form name="form" class="col-sm-6 col-sm-offset-3">
+      <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" disabled ng-value="userData.email">
+      </div>
+      <div class="form-group">
+          <label>Phone</label>
+          <input type="text" class="form-control" disabled ng-value="userData.phone">
+      </div>
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" ng-model="formData.name" required>
@@ -27,7 +35,7 @@
     </div>
 
     <div class="form-group">
-      <label for="last_name">Status</label>
+      <label for="is_available">Status</label>
       <label class="css-input switch switch-sm switch-primary" for="is_available">
           <input type="checkbox" id="is_available" ng-model="formData.is_available">
           <span></span>

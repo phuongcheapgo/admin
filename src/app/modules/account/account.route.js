@@ -13,7 +13,7 @@
     /** @ngInject */
     function config($stateProvider, $urlRouterProvider, $locationProvider)
     {
-        
+
         // State definitions
         $stateProvider
             .state('app.account', {
@@ -27,15 +27,18 @@
             .state('app.account-add', {
                 url: '/account-add/:id',
                 params : {
-                    id : null,
-                    squash: true
+                    id : {
+                        value : null,
+                        squash: true
+                    }
+
                 },
                 controller : 'account.add.controller',
                 templateUrl: 'app/modules/account/views/account.add.html',
                 data: {pageTitle: 'AngularJS Ui Select'},
                 middleware: ['auth']
             })
-            
+
     }
 
 })();

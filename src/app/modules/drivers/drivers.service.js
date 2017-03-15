@@ -19,6 +19,7 @@
         this.updateDriver = updateDriver;
         this.deleteDriver = deleteDriver;
         this.updateStatus = updateStatus;
+        this.getUserDrivers = getUserDrivers;
 
         /** Internal functions */
 
@@ -55,6 +56,10 @@
         function updateStatus(id,params){
             var url = [HOST_API,'api/admin/vehicle/update-status',id].join('/');
             return $http.put(url,params);
+        }
+        function getUserDrivers() {
+            var url = [HOST_API,'api/admin/users/get'].join('/');
+            return $http.get(url,{params : {type : 'driver'} });
         }
     }
 })();

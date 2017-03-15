@@ -13,7 +13,7 @@
     /** @ngInject */
     function config($stateProvider, $urlRouterProvider, $locationProvider)
     {
-        
+
         // State definitions
         $stateProvider
             .state('app.users', {
@@ -26,8 +26,11 @@
             .state('app.user_add', {
                 url: '/user_add/:id',
                 params : {
-                    id : null,
-                    squash: true
+                    id : {
+                        value : null,
+                        squash: true
+                    }
+
                 },
                 controller : 'users.add.controller',
                 templateUrl: 'app/modules/users/views/users.add.html',
