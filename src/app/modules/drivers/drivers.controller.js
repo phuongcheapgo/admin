@@ -20,6 +20,7 @@
         $scope.goEdit = goEdit;
 
         $scope.goAdd = goAdd;
+        $scope.goAddUser = goAddUser;
 
         $scope.deleteAction = deleteAction;
         $scope.changeStatus = changeStatus;
@@ -223,7 +224,11 @@
         }
 
         function editUserAction(id) {
-            $state.go('app.user_add',{id : id});
+            $state.go('app.user_add',{id : id, type : 'driver'});
+        }
+
+        function goAddUser(){
+            $state.go('app.user_add',{id : null, type : 'driver'});
         }
 
 

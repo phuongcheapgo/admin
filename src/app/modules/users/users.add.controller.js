@@ -39,7 +39,7 @@
             {
                 $scope.formData = {
                     gender : 0,
-                    type : 'rider'
+                    type : $stateParams.type || 'rider'
                 };
             }
         }

@@ -55,11 +55,11 @@
 
 
         function editAction(id){
-            $state.go('app.user_add',{id : id});
+            $state.go('app.user_add',{id : id , type : 'rider'});
         }
 
         function goAdd(){
-            $state.go('app.user_add',{id : null});
+            $state.go('app.user_add',{id : null, type : 'rider'});
         }
 
         function deleteAction(id){

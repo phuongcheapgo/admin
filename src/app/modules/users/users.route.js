@@ -24,9 +24,13 @@
                 middleware: ['auth']
             })
             .state('app.user_add', {
-                url: '/user_add/:id',
+                url: '/user_add/:id/type/{type}',
                 params : {
                     id : {
+                        value : null,
+                        squash: true
+                    },
+                    type : {
                         value : null,
                         squash: true
                     }
