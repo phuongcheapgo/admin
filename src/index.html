@@ -40,6 +40,11 @@
 
     <body>
 
+        <div class="loading" ng-show="isLoading()">
+
+            <img src="/assets/spin.svg" alt="" width="50" height="50">
+        </div>
+
         <div id="main" ui-view></div>
         <!-- build:js(src) scripts/vendor.js -->
         <!-- bower:js -->
@@ -50,8 +55,8 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
-        
+
+
 
         <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
         <!-- inject:js -->

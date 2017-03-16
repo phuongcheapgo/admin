@@ -7,7 +7,7 @@
         .controller('index.controller', controller);
 
     /** @ngInject */
-    function controller($scope, $state, $timeout, $localStorage)
+    function controller($scope, $state, $timeout, $localStorage, $http)
     {
         console.log('index controller');
 
@@ -18,8 +18,10 @@
         $scope.sidebarClose = sidebarClose;
         $scope.toggleHeaderSearch = toggleHeaderSearch;
 
+        
 
-        $scope.USER_DATA = $localStorage.USER_DATA
+
+        $scope.USER_DATA = $localStorage.USER_DATA;
 
 
         /** Internal functions */

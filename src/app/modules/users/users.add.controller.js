@@ -59,7 +59,7 @@
                                 showConfirmButton: true,
                                 type : 'success'
                             },function(){
-                                $state.go('app.users');
+                                cancelAction();
                             });
                         }
                     } catch (error) {
@@ -81,7 +81,7 @@
                                 showConfirmButton: true,
                                 type : 'success'
                             },function(){
-                                $state.go('app.users');
+                                cancelAction();
                             });
                         }
                     } catch (error) {
@@ -107,7 +107,15 @@
         }
 
         function cancelAction(){
-            $state.go('app.users');
+            if($scope.formData.type == 'driver')
+            {
+                $state.go('app.drivers');
+            }
+            else
+            {
+                $state.go('app.users');
+            }
+
         }
     }
 })();

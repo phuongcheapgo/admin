@@ -7,7 +7,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock($rootScope, $timeout, $state, $stateParams)
+    function runBlock($rootScope, $timeout, $state, $stateParams, $http)
     {
         // Activate loading indicator
         var stateChangeStartEvent = $rootScope.$on('$stateChangeStart', function ()
@@ -34,5 +34,10 @@
             stateChangeStartEvent();
             stateChangeSuccessEvent();
         });
+
+
+        $rootScope.isLoading = function () {
+            return $http.pendingRequests.length > 0;
+        };
     }
 })();
