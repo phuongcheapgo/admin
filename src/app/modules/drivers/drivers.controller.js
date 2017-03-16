@@ -16,6 +16,9 @@
         });
 
 
+        $scope.pagination = {};
+
+
         $scope.HOST_API = CONFIG.HOST_API + '/';
         $scope.goEdit = goEdit;
 
@@ -29,29 +32,12 @@
         $scope.loadDrivers = loadDrivers;
         $scope.editUserAction = editUserAction;
 
+        $scope.pageChanged = pageChanged;
+
         (function onInit(){
-            getList();
             getUserDrivers();
         })();
 
-
-        function getList(){
-            drivesAPI.getDrivers().then(function(res){
-                try {
-                    $scope.items = res.data.rows;
-
-                    $scope.items = $scope.items.map(function(item){
-                        item.detail = getVehicleType(res.data.types,item.vehicle_type_id);
-                        item.document_types = item.documents.map(function (_doc) {
-                            return _doc.type;
-                        });
-                        return item;
-                    });
-                } catch (error) {
-                    console.log(error);
-                }
-            });
-        }
 
         function getVehicleType(vehiclesType,id){
             var result = null;
@@ -73,7 +59,8 @@
             $state.go('app.drivers_add',{id : null, user : user});
         }
 
-        function deleteAction(id){
+        function deleteAction(item){
+            var id = item._id;
             swal(
                 {
                     title: "Are you sure?",
@@ -89,7 +76,7 @@
                     drivesAPI.deleteDriver(id).then(function(res){
                         if(res.data.success)
                         {
-                            getList();
+                            item.is_removed = true;
                             swal({
                                 title: res.data.msg,
                                 showConfirmButton: true,
@@ -123,10 +110,12 @@
         }
 
         function getUserDrivers() {
-            drivesAPI.getUserDrivers().then(function (res) {
-                console.log(res);
+            var params = _getParamsList();
+            drivesAPI.getUserDrivers(params).then(function (res) {
                 try{
                     $scope.users = res.data.rows;
+                    $scope.pagination.page = res.data.page;
+                    $scope.pagination.total = res.data.total;
                 }catch (e){
 
                 }
@@ -229,6 +218,20 @@
 
         function goAddUser(){
             $state.go('app.user_add',{id : null, type : 'driver'});
+        }
+
+        function _getParamsList() {
+            var _res = {
+                type : 'driver',
+                page : $scope.pagination.page || 1,
+                limit : $scope.pagination.limit || 15
+            };
+
+            return _res;
+        }
+
+        function pageChanged() {
+            return getUserDrivers();
         }
 
 

@@ -9,6 +9,7 @@
         .module('app', [
             'ui.router',
             'ui.router.middleware',
-            'ngStorage'
+            'ngStorage',
+            'ui.bootstrap'
         ]);
 })();

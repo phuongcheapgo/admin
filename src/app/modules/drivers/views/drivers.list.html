@@ -20,7 +20,7 @@
                 <th style="width: 100px;">Action</th>
             </tr>
 
-            <tr ng-repeat="_item in item.vehicle" ng-if="item.vehicle.length > 0">
+            <tr ng-if="!_item.is_removed" ng-repeat="_item in item.vehicle" ng-if="item.vehicle.length > 0">
                 <td>{{::_item.name}}</td>
                 <td>{{::_item.brand}}</td>
                 <td>{{::_item.price_per_km | number}}</td>
@@ -60,7 +60,7 @@
                     <button class="btn btn-default btn-xs" type="button" ng-click="goEdit(item._id,_item._id)">
                     <i class="glyphicon glyphicon-pencil"></i>
                 </button>
-                    <button class="btn btn-danger btn-xs" type="button" ng-click="deleteAction(_item._id)">
+                    <button class="btn btn-danger btn-xs" type="button" ng-click="deleteAction(_item)">
                     <i class="glyphicon glyphicon-trash"></i>
                 </button>
                 </td>

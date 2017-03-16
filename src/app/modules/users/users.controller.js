@@ -14,6 +14,8 @@
 
         $scope.listItems = {};
 
+        $scope.pagination = {};
+
         $scope.editAction = editAction;
         $scope.goAdd = goAdd;
 
@@ -21,22 +23,24 @@
 
         $scope.changeActivation = changeActivation;
 
+        $scope.pageChanged = pageChanged;
+
         /** Internal functions */
 
         (function onInit(){
-            getRiders();
-            getDrivers();
+            getList();
         })();
 
 
-        function getList(type){
-            var params = {
-                type : type
-            };
+        function getList(){
+            var params = _getParams();
 
             usersAPI.getUsers(params).then(function(res){
                 try {
-                    $scope.listItems[type] = res.data.rows;
+                    $scope.listItems[params.type] = res.data.rows;
+
+                    $scope.pagination.page = res.data.page;
+                    $scope.pagination.total = res.data.total;
                 } catch (error) {
 
                 }
@@ -46,11 +50,7 @@
 
 
         function getRiders(){
-            return getList('rider');
-        }
-
-        function getDrivers(){
-            return getList('driver');
+            return getList();
         }
 
 
@@ -112,6 +112,20 @@
                     console.log(e);
                 }
             });
+        }
+
+        function _getParams() {
+            var _res = {
+                type : 'rider',
+                page : $scope.pagination.page || 1,
+                limit : $scope.pagination.limit || 15
+            };
+
+            return _res;
+        }
+
+        function pageChanged() {
+            return getRiders();
         }
     }
 
