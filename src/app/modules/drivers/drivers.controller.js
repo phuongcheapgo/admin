@@ -16,7 +16,9 @@
         });
 
 
-        $scope.pagination = {};
+        $scope.pagination = {
+            limit : 15
+        };
 
 
         $scope.HOST_API = CONFIG.HOST_API + '/';

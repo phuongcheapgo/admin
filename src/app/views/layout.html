@@ -54,17 +54,16 @@
                                     </a>
                                 </li>
 
-                                <!--<li class="open">
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
+                                <li ng-class="{'open' : $state.includes('app.statistics')}">
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#">
+                                        <i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Statistics</span>
+                                    </a>
                                     <ul>
                                         <li>
-                                            <a href="start_backend.html">Link #1</a>
-                                        </li>
-                                        <li>
-                                            <a href="start_backend.html">Link #2</a>
+                                            <a ui-sref-active="active" ui-sref="app.statistics.driver">Driver</a>
                                         </li>
                                     </ul>
-                                </li>-->
+                                </li>
                             </ul>
                         </div>
                         <!-- END Side Content -->

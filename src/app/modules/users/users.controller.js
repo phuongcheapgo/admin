@@ -14,7 +14,9 @@
 
         $scope.listItems = {};
 
-        $scope.pagination = {};
+        $scope.pagination = {
+            limit : 15
+        };
 
         $scope.editAction = editAction;
         $scope.goAdd = goAdd;

@@ -1,0 +1,51 @@
+<div class="block">
+    <div class="block-content" style="max-height: 300px; overflow: auto">
+        <table class="table table-borderless table-vcenter">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 300px;">Trip</th>
+                <th class="text-center">Distance(Km)</th>
+                <th class="text-center">Time(Minute)</th>
+                <th class="text-center">Images</th>
+                <th class="text-right">Cost</th>
+                <th class="text-center" style="width: 100px;">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="trip in item.transit">
+                <td class="text-center">
+                    <div class="label label-default" style="line-height: normal;display: block;white-space: normal;margin-bottom: 5px;">
+                        {{trip.pickup_location_address}}
+                    </div>
+                    <div class="label label-success" style="line-height: normal;display: block;white-space: normal;">
+                        {{trip.complete_location_address}}
+                    </div>
+                </td>
+                <td class="text-center">
+                    {{trip.distance/1000}}
+                </td>
+                <td class="text-center">
+                    {{trip.time.toFixed(3)}}
+                </td>
+                <td class="text-center visible-lg">
+                    <a href="javascript:void(0)">View</a>
+                </td>
+                <td class="text-right hidden-xs">
+                    <strong>
+                        {{trip.receipt.total | number}}
+                    </strong>
+                </td>
+                <td class="text-center">
+                    <div class="btn-group btn-group-xs">
+                        <a href="base_pages_ecom_order.html" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="View"><i class="fa fa-eye"></i></a>
+                        <a href="javascript:void(0)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Delete"><i class="fa fa-times text-danger"></i></a>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-if="item.transit.length < 1">
+                <td colspan="100%" class="text-center">No data</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

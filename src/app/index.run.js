@@ -25,7 +25,7 @@
         });
 
         // Store state in the root scope for easy access
-        $rootScope.state = $state;
+        $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
         // Cleanup

@@ -10,12 +10,15 @@
     <div class="block-content">
         <div class="table-responsive" id="rider">
             <table class="table table-striped table-vcenter table-hover" style="margin-top: 20px;">
+                <thead>
                 <tr>
                     <th>Email</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th style="width: 150px;">Action</th>
                 </tr>
+                </thead>
+
 
                 <tr ng-repeat="item in listItems.rider">
                     <td>{{::item.email}}</td>
@@ -32,7 +35,7 @@
                 </tr>
             </table>
 
-            <ul uib-pagination boundary-links="true" total-items="pagination.total" ng-model="pagination.page" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+            <ul uib-pagination boundary-links="true" total-items="pagination.total" ng-model="pagination.page" ng-change="pageChanged()" items-per-page="pagination.limit" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
         </div>
     </div>
 </div>
