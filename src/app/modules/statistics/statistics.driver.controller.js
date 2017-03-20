@@ -11,12 +11,26 @@
     /** @ngInject */
     function controller($scope, $state, statisticsAPI) {
 
+        var _this = this;
+
+        $scope.filterDate = {};
+
+        $scope.filterRange = [
+            { key : 'today', name : 'Today' },
+            { key : 'a_week', name : 'A Week' },
+            { key : 'a_month', name : 'A Month' }
+        ];
+
+        $scope.filterDate = $scope.filterRange[0];
 
         $scope.pagination = {
             limit : 15
         };
 
+        $scope.changeFilter = changeFilter;
+
         $scope.pageChanged = pageChanged;
+
         /** Internal functions */
 
         (function onInit() {
@@ -28,11 +42,9 @@
         function getList() {
             var params = getParams();
             statisticsAPI.getDrivers(params).then(function (res) {
-                console.log(res);
+
 
                 $scope.items = res.data.rows;
-
-
 
                 $scope.pagination.page = res.data.page;
                 $scope.pagination.total = res.data.total;
@@ -45,6 +57,7 @@
                 page : $scope.pagination.page || 1,
                 limit : $scope.pagination.limit || 15
             };
+            _res.range_date = $scope.filterDate.key;
 
             return _res;
         }
@@ -57,9 +70,14 @@
         function getDriverTotal() {
             var params = getParams();
             statisticsAPI.getDriverTotal(params).then(function (res) {
-                console.log(res);
+
                 $scope.total = res.data;
             });
+        }
+
+        function changeFilter(filter) {
+            $scope.filterDate = filter;
+            getList();
         }
     }
 })();

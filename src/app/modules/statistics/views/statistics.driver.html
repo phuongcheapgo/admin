@@ -2,16 +2,10 @@
     <div class="block-header bg-gray-lighter">
         <ul class="block-options">
             <li class="dropdown">
-                <button type="button" data-toggle="dropdown">Today <span class="caret"></span></button>
+                <button type="button" data-toggle="dropdown">{{filterDate.name}} <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a tabindex="-1" href="javascript:void(0)">Today</a>
-                    </li>
-                    <li>
-                        <a tabindex="-1" href="javascript:void(0)">A Week</a>
-                    </li>
-                    <li>
-                        <a tabindex="-1" href="javascript:void(0)">A Month</a>
+                    <li ng-click="changeFilter(filter)" ng-repeat="filter in filterRange">
+                        <a tabindex="-1" href="javascript:void(0)">{{filter.name}}</a>
                     </li>
                 </ul>
             </li>
@@ -25,7 +19,7 @@
         <h3 class="block-title">Driver Statistics</h3>
     </div>
     <div class="block-content">
-        <div class="row text-uppercase bg-gray-lighter" style="padding-top: 20px;">
+        <div class="clearfix text-uppercase bg-gray-lighter" style="padding-top: 20px;">
             <div class="col-xs-6 col-sm-3">
                 <div class="block block-rounded">
                     <div class="block-content block-content-full">
@@ -46,7 +40,7 @@
                             <small><i class="si si-calendar"></i> Today</small>
                         </div>
                         <div class="font-s12 font-w700">Cost</div>
-                        <a class="h2 font-w300 text-primary" href="base_comp_charts.html" data-toggle="countTo" data-to="{{total.total_cost}}">{{total.total_cost | number}}</a>
+                        <a class="h2 font-w300 text-primary" data-toggle="countTo" data-to="{{total.total_cost}}">{{total.total_cost | number}}</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +91,7 @@
             </tr>
             </tbody>
         </table>
-        <ul uib-pagination boundary-links="true" total-items="pagination.total" ng-model="pagination.page" ng-change="pageChanged()" items-per-page="pagination.limit" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+        <ul ng-if="pagination.total" uib-pagination boundary-links="true" total-items="pagination.total" ng-model="pagination.page" ng-change="pageChanged()" items-per-page="pagination.limit" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 
     </div>
 </div>
