@@ -8,7 +8,7 @@
                 <th class="text-center">Time(Minute)</th>
                 <th class="text-center">Images</th>
                 <th class="text-right">Cost</th>
-                <th class="text-center" style="width: 100px;">Action</th>
+                <!--<th class="text-center" style="width: 100px;">Action</th>-->
             </tr>
             </thead>
             <tbody>
@@ -28,19 +28,20 @@
                     {{trip.time.toFixed(3)}}
                 </td>
                 <td class="text-center visible-lg">
-                    <a href="javascript:void(0)">View</a>
+                    <a role="button" img-lightbox ng-src="{{::trustUrl(host_image + trip.transit_static_map)}}"><i class="fa fa-eye" aria-hidden="true"></i>
+                        View</a>
                 </td>
                 <td class="text-right hidden-xs">
                     <strong>
                         {{trip.receipt.total | number}}
                     </strong>
                 </td>
-                <td class="text-center">
-                    <div class="btn-group btn-group-xs">
-                        <a href="base_pages_ecom_order.html" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="View"><i class="fa fa-eye"></i></a>
-                        <a href="javascript:void(0)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Delete"><i class="fa fa-times text-danger"></i></a>
-                    </div>
-                </td>
+                <!--<td class="text-center">-->
+                    <!--<div class="btn-group btn-group-xs">-->
+                        <!--<a href="base_pages_ecom_order.html" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="View"><i class="fa fa-eye"></i></a>-->
+                        <!--<a href="javascript:void(0)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Delete"><i class="fa fa-times text-danger"></i></a>-->
+                    <!--</div>-->
+                <!--</td>-->
             </tr>
             <tr ng-if="item.transit.length < 1">
                 <td colspan="100%" class="text-center">No data</td>

@@ -7,7 +7,7 @@
         .controller('index.controller', controller);
 
     /** @ngInject */
-    function controller($scope, $state, $timeout, $localStorage, $http)
+    function controller($scope, $state, $timeout, $localStorage, $sce)
     {
         console.log('index controller');
 
@@ -17,8 +17,9 @@
         $scope.sidebarToggle = sidebarToggle;
         $scope.sidebarClose = sidebarClose;
         $scope.toggleHeaderSearch = toggleHeaderSearch;
+        $scope.trustUrl = trustUrl;
 
-        
+
 
 
         $scope.USER_DATA = $localStorage.USER_DATA;
@@ -44,6 +45,10 @@
 
         function toggleHeaderSearch(){
             $('.js-header-search').toggleClass('header-search-xs-visible');
+        }
+
+        function trustUrl(url) {
+            return $sce.trustAsResourceUrl(url)
         }
     }
 })();

@@ -9,7 +9,7 @@
 var App = angular.module('app');
 
 
- 
+
 // By adding the attribute 'data-js-view-loader'
 App.directive('jsViewLoader', function () {
     return {
@@ -654,12 +654,13 @@ App.directive('jsSimplemde', function () {
 });
 
 
-App.directive('imgLightbox',function(){
+App.directive('imgLightbox',/** @ngInject */function($sce){
     return {
         link: function (scope, element, attrs) {
+
             element.magnificPopup({
                 items: {
-                    src: attrs.ngSrc
+                    src: $sce.trustAsResourceUrl(attrs.ngSrc)
                 },
                 type: 'image' // this is default type
             });

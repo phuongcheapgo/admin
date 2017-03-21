@@ -9,9 +9,11 @@
     angular.module('app').controller('statistics.driver.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, statisticsAPI) {
+    function controller($scope, $state, statisticsAPI, CONFIG) {
 
         var _this = this;
+
+        $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
 
         $scope.filterDate = {};
 
