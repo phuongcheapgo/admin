@@ -15,6 +15,7 @@
             return item;
         });
 
+        $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
 
         $scope.pagination = {
             limit : 15

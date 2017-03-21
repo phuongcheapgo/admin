@@ -9,8 +9,8 @@
     angular.module('app').controller('users.controller',controller);
 
     /** @ngInject */
-    function controller($scope, usersAPI, $state){
-        console.log('users controller');
+    function controller($scope, usersAPI, $state, CONFIG){
+        $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
 
         $scope.listItems = {};
 

@@ -71,8 +71,6 @@
             {
 
                 usersAPI.addUser(params).then(function(res){
-                    console.log(res);
-
                     try {
                         if(res.data.success)
                         {
@@ -99,6 +97,7 @@
                 last_name : object.last_name,
                 gender : object.gender,
                 type : object.type,
+                phone : object.phone
             };
 
             if(object.password) params.password = object.password;
