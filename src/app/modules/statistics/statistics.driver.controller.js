@@ -78,6 +78,7 @@
         function changeFilter(filter) {
             $scope.filterDate = filter;
             getList();
+            getDriverTotal();
         }
     }
 })();

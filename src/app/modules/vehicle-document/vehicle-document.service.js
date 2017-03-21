@@ -9,7 +9,7 @@
   angular.module('app').service('vehicleDocAPI',service);
 
   /** @ngInject */
-  function service($http, CONFIG){
+  function service($http, CONFIG, $localStorage, $q){
     var HOST_API = CONFIG.HOST_API;
     this.getListDocument = getListDocument;
     this.getDrivers = getDrivers;
@@ -31,8 +31,27 @@
     }
 
     function addDocument(params) {
+
+        var deferer = $q.defer();
+
         var url = [HOST_API,'api/admin/vehicle-document/add'].join('/');
-        return $http.post(url,params);
+
+        $.ajax({
+            url: url,
+            headers: {
+                "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN,
+            },
+            method: 'post',
+            data: params,
+            processData: false,
+            contentType: false
+        })
+        .done(function (data) {
+            deferer.resolve(data);
+        });
+
+        return deferer.promise;
+
     }
 
     function getDetail(id) {
@@ -41,8 +60,25 @@
     }
 
     function updateDocument(id,params) {
+        var deferer = $q.defer();
         var url = [HOST_API,'api/admin/vehicle-document/update',id].join('/');
-        return $http.put(url,params);
+
+        $.ajax({
+            url: url,
+            headers: {
+                "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN,
+            },
+            method: 'put',
+            data: params,
+            processData: false,
+            contentType: false
+        })
+            .done(function (data) {
+                deferer.resolve(data);
+            });
+
+        return deferer.promise;
+
     }
 
     function removeDocument(id) {

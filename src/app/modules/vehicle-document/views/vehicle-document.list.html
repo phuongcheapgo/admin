@@ -35,7 +35,10 @@
 
         </td>
         <td>{{::item.note}}</td>
-        <td>{{::item.file_names}}</td>
+        <td>
+
+            <img style="width: 40px; height: 40px;display: block" ng-repeat="img in item.file_names" ng-src="{{host_image + img}}" alt="">
+        </td>
         <td>{{::item.created_at | date : 'dd/MMM/yyyy'}}</td>
         <td>
           <button class="btn btn-default btn-xs" type="button" ng-click="goEdit(item)">

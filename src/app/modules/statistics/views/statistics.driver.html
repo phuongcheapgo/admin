@@ -24,7 +24,7 @@
                 <div class="block block-rounded">
                     <div class="block-content block-content-full">
                         <div class="text-muted">
-                            <small><i class="si si-calendar"></i> Today</small>
+                            <small><i class="si si-calendar"></i> {{filterDate.name}}</small>
                         </div>
                         <div class="font-s12 font-w700">
                             Trips
@@ -37,7 +37,7 @@
                 <div class="block block-rounded">
                     <div class="block-content block-content-full">
                         <div class="text-muted">
-                            <small><i class="si si-calendar"></i> Today</small>
+                            <small><i class="si si-calendar"></i> {{filterDate.name}}</small>
                         </div>
                         <div class="font-s12 font-w700">Cost</div>
                         <a class="h2 font-w300 text-primary" data-toggle="countTo" data-to="{{total.total_cost}}">{{total.total_cost | number}}</a>

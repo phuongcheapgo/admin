@@ -8,7 +8,11 @@
   angular.module('app').controller('vehicle-document.controller',controller);
 
   /** @ngInject */
-  function controller($scope, vehicleDocAPI, DOCUMENT_CONFIG, $state) {
+  function controller($scope, vehicleDocAPI, DOCUMENT_CONFIG, $state, CONFIG) {
+
+
+      $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
+
 
     $scope.DOCUMENT_TYPE = DOCUMENT_CONFIG.TYPE;
 

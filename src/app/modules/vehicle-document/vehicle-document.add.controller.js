@@ -9,12 +9,14 @@
     angular.module('app').controller('vehicle-document.add.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, $stateParams, DOCUMENT_CONFIG, vehicleDocAPI, $timeout, $sce){
+    function controller($scope, $state, $stateParams, DOCUMENT_CONFIG, vehicleDocAPI, $timeout, $sce, CONFIG){
 
         $scope.DOCUMENT_TYPE_ARRAY =  Object.keys(DOCUMENT_CONFIG.TYPE).map(function(key){
             var item = DOCUMENT_CONFIG.TYPE[key];
             return item;
         });
+
+        $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
 
         $scope.selectFile = selectFile;
         $scope.saveAction = saveAction;
@@ -33,8 +35,16 @@
             {
                 vehicleDocAPI.getDetail(id).then(function (res) {
                     try{
-                        console.log(res);
                         $scope.formData = res.data.result;
+                        $scope.file_names = $scope.formData.file_names.map(function (item) {
+                            var object = {
+                                src : trustUrl($scope.host_image + item),
+                                isNew : false,
+                                name : item
+                            };
+
+                            return object;
+                        });
                     }catch (e){
 
                     }
@@ -42,7 +52,9 @@
             }
             else
             {
-                $scope.formData = {};
+                $scope.formData = {
+                    file_names : []
+                };
             }
         }
 
@@ -54,7 +66,7 @@
 
                 }
             });
-        };
+        }
 
         function selectFile(event){
 
@@ -64,6 +76,7 @@
                 var file = event.files[i];
 
                 file.src = trustUrl(window.URL.createObjectURL(file));
+                file.isNew = true;
                 $timeout(function(){
                     $scope.file_names.push(file);
                 },0);
@@ -81,12 +94,37 @@
             var id = $stateParams.id;
             if(id)
             {
-                vehicleDocAPI.updateDocument(id,data).then(function (res) {
+                data.file_names = [];
+                var formData = new FormData();
+
+                $scope.file_names.forEach(function (item) {
+                    if(item.isNew == false)
+                    {
+                        data.file_names.push(item.name);
+                    }
+                    else
+                    {
+                        formData.append('files',item);
+                    }
+                });
+
+
+
+
+                for(var key in data){
+                    if(angular.isArray(data[key]))
+                    {
+                        data[key] = JSON.stringify(data[key]);
+                    }
+                    formData.append(key,data[key]);
+                }
+
+                vehicleDocAPI.updateDocument(id,formData).then(function (res) {
                     try{
-                        if(res.data.success)
+                        if(res.success)
                         {
                             swal({
-                                title: res.data.msg,
+                                title: res.msg,
                                 showConfirmButton: true,
                                 type : 'success'
                             },function(){
@@ -94,31 +132,43 @@
                             });
                         }
                     }catch (e){
-                        console.log(error);
+                        console.log(e);
                     }
                 });
             }
             else
             {
-                vehicleDocAPI.addDocument(data).then(function (res) {
+                var formData = new FormData();
+
+                $scope.file_names.forEach(function (item) {
+                    if(item.isNew)
+                    {
+                        formData.append('files',item);
+                    }
+                });
+
+
+                for(var key in data){
+
+
+                    formData.append(key,data[key]);
+                }
+
+                vehicleDocAPI.addDocument(formData).then(function (res) {
                     try{
 
-                        try {
-                            if(res.data.success)
-                            {
-                                swal({
-                                    title: res.data.msg,
-                                    showConfirmButton: true,
-                                    type : 'success'
-                                },function(){
-                                    $state.go('app.vehicle-document');
-                                });
-                            }
-                        } catch (error) {
-                            console.log(error);
+                        if(res.success)
+                        {
+                            swal({
+                                title: res.msg,
+                                showConfirmButton: true,
+                                type : 'success'
+                            },function(){
+                                $state.go('app.vehicle-document');
+                            });
                         }
                     }catch (e){
-
+                        console.log(e);
                     }
                 });
             }
