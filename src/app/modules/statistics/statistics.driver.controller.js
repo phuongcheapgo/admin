@@ -50,6 +50,7 @@
 
                 $scope.pagination.page = res.data.page;
                 $scope.pagination.total = res.data.total;
+                $scope.total_car = res.data.total;
             });
         }
 
