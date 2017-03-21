@@ -9,7 +9,7 @@
   angular.module('app').service('vehicleDocAPI',service);
 
   /** @ngInject */
-  function service($http, CONFIG, $localStorage, $q){
+  function service($http, CONFIG, $localStorage, $q, $rootScope){
     var HOST_API = CONFIG.HOST_API;
     this.getListDocument = getListDocument;
     this.getDrivers = getDrivers;
@@ -31,7 +31,7 @@
     }
 
     function addDocument(params) {
-
+        $rootScope.isLoadingAjax = true;
         var deferer = $q.defer();
 
         var url = [HOST_API,'api/admin/vehicle-document/add'].join('/');
@@ -39,7 +39,7 @@
         $.ajax({
             url: url,
             headers: {
-                "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN,
+                "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN
             },
             method: 'post',
             data: params,
@@ -47,6 +47,7 @@
             contentType: false
         })
         .done(function (data) {
+            $rootScope.isLoadingAjax = false;
             deferer.resolve(data);
         });
 
@@ -60,22 +61,26 @@
     }
 
     function updateDocument(id,params) {
+        $rootScope.isLoadingAjax = true;
+
         var deferer = $q.defer();
         var url = [HOST_API,'api/admin/vehicle-document/update',id].join('/');
 
         $.ajax({
             url: url,
             headers: {
-                "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN,
+                "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN
             },
             method: 'put',
             data: params,
             processData: false,
             contentType: false
         })
-            .done(function (data) {
-                deferer.resolve(data);
-            });
+        .done(function (data) {
+            $rootScope.isLoadingAjax = false;
+            deferer.resolve(data);
+
+        });
 
         return deferer.promise;
 

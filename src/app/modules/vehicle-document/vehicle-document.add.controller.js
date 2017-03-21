@@ -20,6 +20,7 @@
 
         $scope.selectFile = selectFile;
         $scope.saveAction = saveAction;
+        $scope.cancelAction = cancelAction;
 
 
         $scope.file_names = [];
@@ -172,8 +173,9 @@
                     }
                 });
             }
-
-
+        }
+        function cancelAction() {
+            $state.go('app.vehicle-document');
         }
     }
 })();

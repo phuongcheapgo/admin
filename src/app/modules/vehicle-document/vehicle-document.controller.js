@@ -29,7 +29,6 @@
     function getList() {
       vehicleDocAPI.getListDocument().then(function (res) {
           try{
-            console.log(res);
             $scope.items = res.data.rows;
           }catch (e){
 
