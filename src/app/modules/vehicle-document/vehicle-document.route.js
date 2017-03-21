@@ -19,8 +19,10 @@
       .state('app.vehicle-document', {
         url: '/vehicle-document/:id',
         params : {
-          id : null,
-          squash: false
+            id : {
+                value : null,
+                squash: true
+            }
         },
         controller : 'vehicle-document.controller',
         templateUrl: 'app/modules/vehicle-document/views/vehicle-document.list.html',
@@ -30,8 +32,10 @@
       .state('app.vehicle-document-add', {
         url: '/vehicle-document-add/:id',
         params : {
-          id : null,
-          squash: false
+            id : {
+                value : null,
+                squash: true
+            }
         },
         controller : 'vehicle-document.add.controller',
         templateUrl: 'app/modules/vehicle-document/views/vehicle-document.add.html',
