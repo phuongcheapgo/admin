@@ -57,7 +57,7 @@
                 <td colspan="100%" ng-include="'app/modules/drivers/views/drivers.list.html'"></td>
             </tr>
         </table>
-        <ul uib-pagination boundary-links="true" total-items="pagination.total" ng-model="pagination.page" ng-change="pageChanged()" items-per-page="pagination.limit" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+        <ul ng-if="pagination.total" uib-pagination boundary-links="true" total-items="pagination.total" ng-model="pagination.page" ng-change="pageChanged()" items-per-page="pagination.limit" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 
     </div>
 </div>

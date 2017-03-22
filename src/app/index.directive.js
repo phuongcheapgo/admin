@@ -638,7 +638,7 @@ App.directive('jsRangeSlider', function () {
 App.directive('jsDropzone', function () {
     return {
         link: function (scope, element) {
-            scope.dropzone = new Dropzone(element[0]);
+            scope.dropzone = new Dropzone.forElement(element[0]);
         }
     };
 });

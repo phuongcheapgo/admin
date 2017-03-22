@@ -15,7 +15,7 @@
                             </button>
                             <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
 
-                            <a class="h5 text-white" href="start_backend.html">
+                            <a class="h5 text-white">
                                 <span class="h4 font-w600 sidebar-mini-hide">CHEAPGO</span>
                             </a>
                         </div>
@@ -47,6 +47,18 @@
                                     </a>
                                 </li>
 
+                                <li ng-class="{'open' : $state.includes('app.configuration')}">
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#">
+                                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                                        <span class="sidebar-mini-hide">Configuration</span>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a ui-sref-active="active" ui-sref="app.configuration.driver-types">Vehicle Type</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
                                 <li>
                                     <a ui-sref-active="active" ui-sref="app.vehicle-document">
                                       <i class="fa fa-file-text" aria-hidden="true"></i>
@@ -69,7 +81,7 @@
                         <!-- END Side Content -->
                     </div>
                     <!-- Sidebar Content -->
-                </div><div class="slimScrollBar" style="background: rgb(255, 255, 255); width: 5px; position: absolute; top: 0px; opacity: 0.35; display: none; border-radius: 7px; z-index: 99; right: 2px; height: 726px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 1; z-index: 90; right: 2px;"></div></div>
+                </div><div class="slimScrollBar"></div><div class="slimScrollRail"></div></div>
                 <!-- END Sidebar Scroll Container -->
             </nav>
             <!-- END Sidebar -->

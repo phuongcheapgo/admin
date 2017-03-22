@@ -1,0 +1,82 @@
+
+
+
+<div class="block">
+    <div class="block-header bg-gray-lighter">
+        <div class="block-title text-center">
+            <span ng-if="$stateParams.id">EDIT DRIVER TYPE</span>
+            <span ng-if="!$stateParams.id">CREATE DRIVER TYPE</span>
+        </div>
+    </div>
+    <div class="block-content row">
+        <form name="form" class="col-sm-6 col-sm-offset-3" novalidate>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" ng-model="formData.name" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select name="type" id="type" class="form-control" ng-model="formData.type" required>
+                    <option value="Car">Car</option>
+                    <option value="Motorbike">Motorbike</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price_per_km_min">Price/Km Min</label>
+                <input type="number" class="form-control" id="price_per_km_min" ng-model="formData.price_per_km_min" step="1000" required>
+            </div>
+            <div class="form-group">
+                <label for="price_per_km_max">Price/Km Max</label>
+                <input type="number" class="form-control" id="price_per_km_max" ng-model="formData.price_per_km_max" step="1000" required>
+            </div>
+            <div class="form-group">
+                <label for="default_price_per_km">Price/Km Default</label>
+                <input type="number" class="form-control" id="default_price_per_km" ng-model="formData.default_price_per_km" step="1000" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="open_door_price_min">Open Door Price Min</label>
+                <input type="number" class="form-control" id="open_door_price_min" ng-model="formData.open_door_price_min" step="1000" required>
+            </div>
+            <div class="form-group">
+                <label for="open_door_price_max">Open Door Price Max</label>
+                <input type="number" class="form-control" id="open_door_price_max" ng-model="formData.open_door_price_max" step="1000" required>
+            </div>
+            <div class="form-group">
+                <label for="default_open_door_price">Open Door Price Default</label>
+                <input type="number" class="form-control" id="default_open_door_price" ng-model="formData.default_open_door_price" step="1000" required>
+            </div>
+
+            <div class="form-group">
+                <label>Image</label>
+                <div>
+                    <input type="file" onchange="angular.element(this).scope().selectFile(this)" id="image" accept="image/*" style="display: none;">
+                    <label class="dropzone dz-clickable" for="image" style="display: block;">
+                        <div ng-if="!image.src" class="dz-default dz-message">
+                            <span>Browser</span>
+                        </div>
+                        <div>
+                            <img src="{{image.src}}" style="max-height: 200px;">
+                        </div>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="is_activated">Activate</label>
+                <label class="css-input switch switch-sm switch-primary" for="is_activated">
+                    <input type="checkbox" id="is_activated" ng-model="formData.is_activated">
+                    <span></span>
+                </label>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="saveAction(formData)">Submit</button>
+                <button type="button" class="btn btn-default" ng-click="cancelAction()">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+

@@ -14,12 +14,13 @@
     function config($stateProvider, $urlRouterProvider, $locationProvider)
     {
 
+        var ROOT_PATH = 'app/modules/drivers/views';
         // State definitions
         $stateProvider
             .state('app.drivers', {
                 url: '/drivers',
                 controller : 'drivers.controller',
-                templateUrl: 'app/modules/drivers/views/drivers.user.html',
+                templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
                 data: {pageTitle: 'AngularJS Ui Select'},
                 middleware: ['auth']
             })
@@ -37,7 +38,7 @@
 
                 },
                 controller : 'drivers.add.controller',
-                templateUrl: 'app/modules/drivers/views/drivers.add.html',
+                templateUrl: [ROOT_PATH,'drivers.add.html'].join('/'),
                 data: {pageTitle: 'AngularJS Ui Select'},
                 middleware: ['auth']
             })
