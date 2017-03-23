@@ -26,7 +26,7 @@
                 <td>{{::_item.price_per_km | number}}</td>
                 <td>{{::_item.open_door_price | number}}</td>
                 <td>
-                    <img ng-src="{{ ['http://node.cheapgo.com:5050',_item.type.image].join('/') }}" alt="">
+                    <img ng-src="{{ _item.type.image}}" height="40" width="40">
                 </td>
                 <td>
                     <div class="btn-group">
