@@ -15,14 +15,6 @@
 
         $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
 
-        $scope.filterDate = {};
-
-        $scope.filterRange = [
-            { key : 'today', name : 'Today' },
-            { key : 'a_week', name : 'A Week' },
-            { key : 'a_month', name : 'A Month' }
-        ];
-
         $scope.filterDate = $scope.filterRange[0];
 
         $scope.pagination = {

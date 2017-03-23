@@ -20,6 +20,14 @@
         $scope.trustUrl = trustUrl;
 
 
+        $scope.filterRange = [
+            { key : 'today', name : 'Today' },
+            { key : 'a_week', name : 'A Week' },
+            { key : 'a_month', name : 'A Month' }
+        ];
+
+
+
 
 
         $scope.USER_DATA = $localStorage.USER_DATA;
