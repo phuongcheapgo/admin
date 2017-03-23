@@ -10,10 +10,13 @@
     angular.module('app').controller('users.add.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, $stateParams, usersAPI){
+    function controller($scope, $state, $stateParams, usersAPI, $timeout){
 
         $scope.saveAction = saveAction;
         $scope.cancelAction = cancelAction;
+        $scope.selectFile = selectFile;
+
+        $scope.image = {};
 
         (function onInit(){
             getFormData();
@@ -29,6 +32,11 @@
                     try {
 
                         $scope.formData = res.data.result;
+                        $scope.image = {
+                            isNew : false,
+                            src : $scope.formData.avatar
+                        };
+
                         delete $scope.formData.password;
                     } catch (error) {
                         console.log(error);
@@ -47,15 +55,20 @@
         function saveAction(data){
             var id = $stateParams.id;
             var params = parseParams(data);
+            if($scope.image.isNew)
+            {
+                params.files = $scope.image;
+            }
+
             if(id)
             {
                 usersAPI.updateUser(id,params).then(function(res){
 
                     try {
-                        if(res.data.success)
+                        if(res.success)
                         {
                             swal({
-                                title: res.data.msg,
+                                title: res.msg,
                                 showConfirmButton: true,
                                 type : 'success'
                             },function(){
@@ -72,10 +85,10 @@
 
                 usersAPI.addUser(params).then(function(res){
                     try {
-                        if(res.data.success)
+                        if(res.success)
                         {
                             swal({
-                                title: res.data.msg,
+                                title: res.msg,
                                 showConfirmButton: true,
                                 type : 'success'
                             },function(){
@@ -115,6 +128,22 @@
                 $state.go('app.users');
             }
 
+        }
+
+        function selectFile(event) {
+            var length = event.files.length;
+
+            for(var i = 0; i < length; i++){
+                var file = event.files[i];
+
+                file.src = $scope.trustUrl(window.URL.createObjectURL(file));
+                file.isNew = true;
+                $timeout(function(){
+                    $scope.image = file;
+                },0);
+            }
+
+            event.value = null;
         }
     }
 })();

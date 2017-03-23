@@ -36,7 +36,7 @@
                 <td>{{::item.last_name}}</td>
                 <td>{{::item.phone}}</td>
                 <td>
-                    <img ng-src="{{::trustUrl(host_image + item.avatar)}}" alt="Avatar" class="img-circle" style="width: 40px;height: 40px;">
+                    <img ng-src="{{::trustUrl(item.avatar)}}" alt="Avatar" class="img-circle" style="width: 40px;height: 40px;">
                 </td>
                 <td>
                     <label class="css-input switch switch-sm switch-primary" for="{{$index}}">

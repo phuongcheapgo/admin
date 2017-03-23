@@ -9,7 +9,7 @@
     angular.module('app').service('usersAPI',service);
 
     /** @ngInject */
-    function service($http, CONFIG){
+    function service($http, CONFIG, $rootScope, $q , $localStorage){
         var HOST_API = CONFIG.HOST_API;
 
         this.getUsers = getUsers;
@@ -31,13 +31,69 @@
         }
 
         function addUser(params){
+            $rootScope.isLoadingAjax = true;
+            var deferer = $q.defer();
+
+            var formData = new FormData();
+
+            for(var i in params)
+            {
+                formData.append(i, params[i]);
+            }
+
             var url = [HOST_API,'api/admin/users/create'].join('/');
-            return $http.post(url,params);
+
+            $.ajax({
+                url: url,
+                headers: {
+                    "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN
+                },
+                method: 'post',
+                data: formData,
+                processData: false,
+                contentType: false
+            })
+            .done(function (data) {
+                $rootScope.isLoadingAjax = false;
+                deferer.resolve(data);
+
+            });
+
+            return deferer.promise;
         }
 
         function updateUser(id, params){
+            $rootScope.isLoadingAjax = true;
+            var deferer = $q.defer();
+
+            var formData = new FormData();
+
+            for(var i in params)
+            {
+                formData.append(i, params[i]);
+            }
+
+
+
             var url = [HOST_API,'api/admin/users/update',id].join('/');
-            return $http.put(url,params);
+
+            $.ajax({
+                url: url,
+                headers: {
+                    "Authorization":"Bearer "+$localStorage.AUTHENTICATE_TOKEN
+                },
+                method: 'put',
+                data: formData,
+                processData: false,
+                contentType: false
+            })
+            .done(function (data) {
+                $rootScope.isLoadingAjax = false;
+                deferer.resolve(data);
+
+            });
+
+            return deferer.promise;
         }
 
         function deleteUser(id){

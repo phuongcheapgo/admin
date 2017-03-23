@@ -42,6 +42,22 @@
       </div>
     </div>
 
+      <div class="form-group">
+          <label>Image</label>
+          <div>
+              <input type="file" onchange="angular.element(this).scope().selectFile(this)" id="image" accept="image/*" style="display: none;">
+              <label class="dropzone dz-clickable" for="image" style="display: block;">
+                  <div ng-if="!image.src" class="dz-default dz-message">
+                      <span>Browser</span>
+                  </div>
+                  <div>
+                      <img src="{{image.src}}" style="max-height: 200px;">
+                  </div>
+              </label>
+          </div>
+
+      </div>
+
     <!--<div class="form-group">-->
       <!--<label for="last_name">Type</label>-->
 
