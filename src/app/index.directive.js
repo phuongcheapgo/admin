@@ -654,16 +654,38 @@ App.directive('jsSimplemde', function () {
 });
 
 
-App.directive('imgLightbox',/** @ngInject */function($sce){
+App.directive('imgLightbox',/** @ngInject */function($sce , CONFIG, $http){
     return {
         link: function (scope, element, attrs) {
 
-            element.magnificPopup({
-                items: {
-                    src: $sce.trustAsResourceUrl(attrs.ngSrc)
-                },
-                type: 'image' // this is default type
-            });
+            if(attrs.ngSrc)
+            {
+                element.magnificPopup({
+                    items: {
+                        src: $sce.trustAsResourceUrl(attrs.ngSrc)
+                    },
+                    type: 'image' // this is default type
+                });
+            }
+
+            if(attrs.id)
+            {
+                var HOST_API = CONFIG.HOST_API;
+                var URI = 'api/admin/get-image';
+                var url = [HOST_API,URI,attrs.id].join('/');
+
+                $http.get(url).then(function (res) {
+                    var src = ['data:image/false;base64,',res.data].join('');
+                    element.magnificPopup({
+                        items: {
+                            src: src
+                        },
+                        type: 'image' // this is default type
+                    });
+                });
+            }
+
+
         }
     }
 });
@@ -701,6 +723,28 @@ App.directive('tableSort',/** @ngInject */function () {
 
                     scope.$emit('tableSortUpdate',orderList);
                 }
+            });
+        }
+    }
+});
+
+App.directive('imgRequest',/** @ngInject */function ($http, CONFIG) {
+    return {
+        link : function (scope, element, attrs) {
+            var HOST_API = CONFIG.HOST_API;
+            var URI = 'api/admin/get-image';
+
+            var url = [HOST_API,URI,attrs.id].join('/');
+
+
+
+            $http.get(url).then(function (res) {
+
+                var img = new Image();
+                img.src = ['data:image/false;base64,',res.data].join('');
+                img.width = attrs.width || 50;
+                img.height = attrs.height || 50;
+                element.append(img);
             });
         }
     }

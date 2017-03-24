@@ -28,8 +28,10 @@
                     {{trip.time.toFixed(3)}}
                 </td>
                 <td class="text-center visible-lg">
-                    <a role="button" img-lightbox ng-src="{{::trustUrl(host_image + trip.transit_static_map)}}"><i class="fa fa-eye" aria-hidden="true"></i>
-                        View</a>
+                    <a role="button" img-lightbox data-id="{{trip.transit_static_map}}">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        View
+                    </a>
                 </td>
                 <td class="text-right hidden-xs">
                     <strong>

@@ -70,7 +70,7 @@
             };
 
             driverTypesAPI.orderPosition(params).then(function (res) {
-                
+
                 if(res.data.success)
                 {
                     swal({
