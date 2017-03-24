@@ -58,5 +58,28 @@
                 }
             });
         }
+
+
+
+        $scope.$on('tableSortUpdate',function (event,data) {
+            console.log(data);
+
+
+            var params = {
+                order : data
+            };
+
+            driverTypesAPI.orderPosition(params).then(function (res) {
+                
+                if(res.data.success)
+                {
+                    swal({
+                        title: res.data.msg,
+                        showConfirmButton: true,
+                        type : 'success'
+                    });
+                }
+            });
+        })
     }
 })();

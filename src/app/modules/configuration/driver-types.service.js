@@ -18,6 +18,7 @@
         this.getDriverTypeDetail = getDriverTypeDetail;
         this.changeStatus = changeStatus;
         this.updateDriverType = updateDriverType;
+        this.orderPosition = orderPosition;
 
         /** Internal functions */
 
@@ -99,6 +100,12 @@
 
             return deferer.promise;
 
+        }
+
+        function orderPosition(params) {
+            var url = [HOST_API,URI,'order'].join('/');
+
+            return $http.put(url,params);
         }
     }
 })();

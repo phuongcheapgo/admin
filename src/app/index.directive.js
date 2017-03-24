@@ -668,4 +668,42 @@ App.directive('imgLightbox',/** @ngInject */function($sce){
     }
 });
 
+App.directive('tableSort',/** @ngInject */function () {
+    return {
+
+        link : function (scope, element, attrs) {
+            element.sortable({
+                placeholder: "ui-state-highlight",
+                axis: "y",
+                cursor: "move",
+                forceHelperSize: true,
+                forcePlaceholderSize: true,
+                helper: function(e, tr)
+                {
+                    tr.children().each(function () {
+                        $(this).css({
+                            width : $(this).outerWidth(),
+                            height : $(this).outerHeight()
+                        });
+                    });
+
+
+                    return tr;
+                },
+                update: function( event, ui ) {
+                    var orderList = [];
+
+
+                    element.children().each(function () {
+                        var child_id = $(this).data('table-sort-id');
+                        orderList.push(child_id);
+                    });
+
+                    scope.$emit('tableSortUpdate',orderList);
+                }
+            });
+        }
+    }
+});
+
 })();
