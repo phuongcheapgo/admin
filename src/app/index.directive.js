@@ -750,4 +750,59 @@ App.directive('imgRequest',/** @ngInject */function ($http, CONFIG) {
     }
 });
 
+App.directive('sortList',/** @ngInject */function () {
+    return {
+        restrict : 'A',
+        scope : {
+            sortColumn : '@',
+            sortFn : '&sortList'
+        },
+        require: 'ngModel',
+        link : function (scope, element, attrs, ngModel) {
+
+            var text = element.text();
+
+            scope.sort = true;
+
+            element.click(function () {
+
+                scope.sort = ngModel.$viewValue.order == scope.sortColumn ?  !scope.sort : true;
+                ngModel.$setViewValue({order : scope.sortColumn, sort : scope.sort ? 1 : -1});
+                render();
+
+                scope.sortFn({params : ngModel.$viewValue});
+            });
+
+
+
+            ngModel.$render = function () {
+                render();
+                element.css({
+                    cursor: 'pointer'
+                });
+            };
+
+
+            function render() {
+                if(ngModel.$viewValue.order === scope.sortColumn)
+                {
+                    if(ngModel.$viewValue.sort == 1)
+                    {
+                        element.html(text+'&nbsp;<i class="fa fa-sort-asc" aria-hidden="true"></i>');
+                    }
+                    else
+                    {
+                        element.html(text+'&nbsp;<i class="fa fa-sort-desc" aria-hidden="true"></i>');
+                    }
+                }
+                else
+                {
+                    element.html(text+'&nbsp;<i class="fa fa-sort" aria-hidden="true" style="opacity:0.2"></i>');
+                }
+            }
+
+        }
+    }
+});
+
 })();

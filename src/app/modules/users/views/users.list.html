@@ -12,10 +12,10 @@
             <table class="table table-striped table-vcenter table-hover" style="margin-top: 20px;">
                 <thead>
                 <tr>
-                    <th>Email</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Phone</th>
+                    <th sort-list="sortAction(params)" data-ng-model="sortParams" data-sort-column="email">Email</th>
+                    <th sort-list="sortAction(params)" data-ng-model="sortParams" data-sort-column="first_name">First Name</th>
+                    <th sort-list="sortAction(params)" data-ng-model="sortParams" data-sort-column="last_name">Last Name</th>
+                    <th sort-list="sortAction(params)" data-ng-model="sortParams" data-sort-column="phone">Phone</th>
                     <th>Avatar</th>
                     <th style="width: 100px;">Action</th>
                 </tr>

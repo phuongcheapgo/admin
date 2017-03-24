@@ -18,6 +18,8 @@
             limit : 15
         };
 
+        $scope.sortParams = {};
+
         $scope.editAction = editAction;
         $scope.goAdd = goAdd;
 
@@ -26,6 +28,8 @@
         $scope.changeActivation = changeActivation;
 
         $scope.pageChanged = pageChanged;
+
+        $scope.sortAction = sortAction;
 
         /** Internal functions */
 
@@ -125,6 +129,7 @@
                 limit : $scope.pagination.limit || 15
             };
 
+            _res = Object.assign(_res,$scope.sortParams);
             return _res;
         }
 
@@ -134,7 +139,12 @@
 
         $scope.$on('globalSearch',function (event, data) {
             $scope.listItems['rider'] = $filter('filter')(_this.fixedList, {'$' : data});
-        })
+        });
+
+        function sortAction() {
+            $scope.pagination.page = 1;
+            getList();
+        }
     }
 
 })();

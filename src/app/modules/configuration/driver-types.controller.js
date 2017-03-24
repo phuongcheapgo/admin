@@ -15,6 +15,8 @@
         $scope.goAdd = goAdd;
         $scope.changeStatus = changeStatus;
 
+
+
         (function onInit(){
             getList();
         })();

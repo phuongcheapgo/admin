@@ -22,6 +22,8 @@
             limit : 15
         };
 
+        $scope.sortParams = {};
+
 
         $scope.HOST_API = CONFIG.HOST_API + '/';
         $scope.goEdit = goEdit;
@@ -37,6 +39,8 @@
         $scope.editUserAction = editUserAction;
 
         $scope.pageChanged = pageChanged;
+
+        $scope.sortAction = sortAction;
 
         (function onInit(){
             getUserDrivers();
@@ -233,6 +237,8 @@
                 limit : $scope.pagination.limit || 15
             };
 
+            _res = Object.assign(_res,$scope.sortParams);
+
             return _res;
         }
 
@@ -245,5 +251,10 @@
             $scope.users = $filter('filter')(_this.fixedList, {'$' : data});
         });
 
+
+        function sortAction() {
+            $scope.pagination.page = 1;
+            getUserDrivers();
+        }
     }
 })();

@@ -21,9 +21,13 @@
             limit : 15
         };
 
+        $scope.sortParams = {};
+
         $scope.changeFilter = changeFilter;
 
         $scope.pageChanged = pageChanged;
+
+        $scope.sortAction = sortAction;
 
         /** Internal functions */
 
@@ -57,6 +61,8 @@
             };
             _res.range_date = $scope.filterDate.key;
 
+            _res = Object.assign(_res,$scope.sortParams);
+
             return _res;
         }
 
@@ -77,6 +83,11 @@
             $scope.filterDate = filter;
             getList();
             getDriverTotal();
+        }
+
+        function sortAction(params) {
+            $scope.pagination.page = 1;
+            return getList();
         }
 
 
