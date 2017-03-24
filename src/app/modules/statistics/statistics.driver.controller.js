@@ -9,7 +9,7 @@
     angular.module('app').controller('statistics.driver.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, statisticsAPI, CONFIG) {
+    function controller($scope, $state, statisticsAPI, CONFIG, $filter) {
 
         var _this = this;
 
@@ -43,6 +43,9 @@
                 $scope.pagination.page = res.data.page;
                 $scope.pagination.total = res.data.total;
                 $scope.total_car = res.data.total;
+
+
+                _this.fixedList = angular.copy($scope.items);
             });
         }
 
@@ -75,6 +78,11 @@
             getList();
             getDriverTotal();
         }
+
+
+        $scope.$on('globalSearch',function (event, data) {
+            $scope.items = $filter('filter')(_this.fixedList, {'$' : data});
+        })
     }
 })();
 

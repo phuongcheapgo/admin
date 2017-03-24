@@ -9,8 +9,8 @@
     angular.module('app').controller('users.controller',controller);
 
     /** @ngInject */
-    function controller($scope, usersAPI, $state, CONFIG){
-        $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
+    function controller($scope, usersAPI, $state, $filter){
+        var _this = this;
 
         $scope.listItems = {};
 
@@ -40,9 +40,11 @@
             usersAPI.getUsers(params).then(function(res){
                 try {
                     $scope.listItems[params.type] = res.data.rows;
-
                     $scope.pagination.page = res.data.page;
                     $scope.pagination.total = res.data.total;
+
+
+                    _this.fixedList = angular.copy($scope.listItems[params.type]);
                 } catch (error) {
 
                 }
@@ -129,6 +131,10 @@
         function pageChanged() {
             return getRiders();
         }
+
+        $scope.$on('globalSearch',function (event, data) {
+            $scope.listItems['rider'] = $filter('filter')(_this.fixedList, {'$' : data});
+        })
     }
 
 })();

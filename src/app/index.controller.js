@@ -19,11 +19,13 @@
         $scope.toggleHeaderSearch = toggleHeaderSearch;
         $scope.trustUrl = trustUrl;
 
+        $scope.globalSearch = globalSearch;
+
 
         $scope.filterRange = [
             { key : 'today', name : 'Today' },
-            { key : 'a_week', name : 'A Week' },
-            { key : 'a_month', name : 'A Month' }
+            { key : 'a_week', name : 'This Week' },
+            { key : 'a_month', name : 'This Month' }
         ];
 
 
@@ -57,6 +59,10 @@
 
         function trustUrl(url) {
             return $sce.trustAsResourceUrl(url)
+        }
+
+        function globalSearch(keyword) {
+            $scope.$broadcast('globalSearch',keyword);
         }
     }
 })();

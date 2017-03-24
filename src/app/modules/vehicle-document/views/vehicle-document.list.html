@@ -36,7 +36,7 @@
         </td>
         <td>{{::item.note}}</td>
         <td>
-            <img-request style="width: 40px; height: 40px;display: block" ng-repeat="img in item.file_names" data-id="{{img}}"></img-request>
+            <img-request width="40" height="40" style="display: block" ng-repeat="img in item.file_names" data-id="{{img}}"></img-request>
         </td>
         <td>{{::item.created_at | date : 'dd/MMM/yyyy'}}</td>
         <td>

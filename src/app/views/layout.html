@@ -105,9 +105,9 @@
                         </button>
                     </li>
                     <li class="js-header-search header-search">
-                        <form class="form-horizontal" action="start_backend.html" method="post">
+                        <form class="form-horizontal" novalidate>
                             <div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">
-                                <input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Search..">
+                                <input class="form-control" ng-change="globalSearch(search)" ng-model="search"  type="text" id="base-material-text" name="base-material-text" placeholder="Search...">
                                 <span class="input-group-addon"><i class="si si-magnifier"></i></span>
                             </div>
                         </form>

@@ -9,10 +9,8 @@
     angular.module('app').controller('driver-types.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, driverTypesAPI, CONFIG){
-
-        $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
-
+    function controller($scope, $state, driverTypesAPI, CONFIG, $filter){
+        var _this = this;
         $scope.goEdit = goEdit;
         $scope.goAdd = goAdd;
         $scope.changeStatus = changeStatus;
@@ -25,6 +23,7 @@
             driverTypesAPI.getDriverType().then(function(res){
                 try {
                     $scope.items = res.data.rows;
+                    _this.fixedList = angular.copy($scope.items);
                 } catch (error) {
 
                 }
@@ -80,6 +79,11 @@
                     });
                 }
             });
-        })
+        });
+
+
+        $scope.$on('globalSearch',function (event, data) {
+            $scope.items = $filter('filter')(_this.fixedList, {'$' : data});
+        });
     }
 })();

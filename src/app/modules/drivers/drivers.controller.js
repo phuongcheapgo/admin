@@ -9,13 +9,14 @@
     angular.module('app').controller('drivers.controller',controller);
 
     /** @ngInject */
-    function controller($scope, $state, drivesAPI, usersAPI, driverTypesAPI, CONFIG, DOCUMENT_CONFIG){
+    function controller($scope, $state, drivesAPI, usersAPI, driverTypesAPI, CONFIG, DOCUMENT_CONFIG, $filter){
+
+        var _this= this;
+
         $scope.DOCUMENT_TYPE_ARRAY =  Object.keys(DOCUMENT_CONFIG.TYPE).map(function(key){
             var item = DOCUMENT_CONFIG.TYPE[key];
             return item;
         });
-
-        $scope.host_image = [CONFIG.HOST_API,'api/admin/get-image/'].join('/');
 
         $scope.pagination = {
             limit : 15
@@ -119,6 +120,8 @@
                     $scope.users = res.data.rows;
                     $scope.pagination.page = res.data.page;
                     $scope.pagination.total = res.data.total;
+
+                    _this.fixedList = angular.copy($scope.users);
                 }catch (e){
 
                 }
@@ -237,6 +240,10 @@
             return getUserDrivers();
         }
 
+
+        $scope.$on('globalSearch',function (event, data) {
+            $scope.users = $filter('filter')(_this.fixedList, {'$' : data});
+        });
 
     }
 })();
