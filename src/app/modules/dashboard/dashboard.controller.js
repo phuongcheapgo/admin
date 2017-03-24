@@ -9,7 +9,7 @@
     angular.module('app').controller('dashboard.controller',controller);
 
     /** @ngInject */
-    function controller($scope, dashboardAPI) {
+    function controller($scope, dashboardAPI, $timeout, $window) {
         var _this = this;
 
         $scope.filterDate = $scope.filterRange[0];
@@ -18,7 +18,8 @@
 
         $scope.changeFilter = changeFilter;
 
-        (function onInit() {
+
+    (function onInit() {
             getNewUser();
             getNewVehicle();
         })();
@@ -54,6 +55,7 @@
         function changeFilter(filter) {
             $scope.filterDate = filter;
             getNewUser();
+            getNewVehicle();
         }
 
         function getParams() {
