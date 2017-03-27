@@ -6,7 +6,7 @@
 (function(){
     'use strict';
 
-    angular.module('app').controller('drivers.controller',controller);
+    angular.module('app').controller('drivers.controller.list',controller);
 
     /** @ngInject */
     function controller($scope, $state, drivesAPI, usersAPI, driverTypesAPI, CONFIG, DOCUMENT_CONFIG, $filter){
@@ -43,20 +43,11 @@
         $scope.sortAction = sortAction;
 
         (function onInit(){
-            getUserDrivers();
+            getList();
         })();
 
 
-        function getVehicleType(vehiclesType,id){
-            var result = null;
-            vehiclesType.forEach(function(item){
-                if(item._id === id){
-                    result = item;
-                }
-            });
 
-            return result;
-        }
 
         function goEdit(user,id){
 
@@ -132,6 +123,36 @@
             });
         }
 
+        function getDriverHasVerify() {
+            var params = _getParamsList();
+            drivesAPI.getDriverHasVerify(params).then(function (res) {
+                try{
+                    $scope.users = res.data.rows;
+                    $scope.pagination.page = res.data.page;
+                    $scope.pagination.total = res.data.total;
+
+                    _this.fixedList = angular.copy($scope.users);
+                }catch (e){
+
+                }
+            });
+        }
+
+        function getDriverHasNoVerify() {
+            var params = _getParamsList();
+            drivesAPI.getDriverHasNoVerify(params).then(function (res) {
+                try{
+                    $scope.users = res.data.rows;
+                    $scope.pagination.page = res.data.page;
+                    $scope.pagination.total = res.data.total;
+
+                    _this.fixedList = angular.copy($scope.users);
+                }catch (e){
+
+                }
+            });
+        }
+
         function changeActivation(id,status) {
 
             usersAPI.changeActivation(id,{status : status}).then(function (res) {
@@ -171,7 +192,7 @@
                                     title: res.data.msg,
                                     showConfirmButton: true,
                                     type : 'success'
-                                },getUserDrivers);
+                                },getList());
                             }
                         } catch (error) {
                             console.log(error);
@@ -239,11 +260,13 @@
 
             _res = Object.assign(_res,$scope.sortParams);
 
+
+
             return _res;
         }
 
         function pageChanged() {
-            return getUserDrivers();
+            return getList();
         }
 
 
@@ -254,7 +277,44 @@
 
         function sortAction() {
             $scope.pagination.page = 1;
-            getUserDrivers();
+            getList();
+        }
+
+        function detectRoute() {
+
+            var route = $state.current;
+            if(route.name == 'app.drivers.verify'){
+                return 'verify';
+            }
+
+            if(route.name == 'app.drivers.not_verify'){
+                return 'not_verify';
+            }
+
+            if(route.name == 'app.drivers.list'){
+                return 'list';
+            }
+        }
+
+        function getList() {
+            var route = detectRoute();
+
+            if(route == 'list')
+            {
+                return getUserDrivers();
+            }
+
+            if(route == 'verify')
+            {
+                return getDriverHasVerify();
+            }
+
+            if(route == 'not_verify')
+            {
+                return getDriverHasNoVerify();
+            }
+
+
         }
     }
 })();

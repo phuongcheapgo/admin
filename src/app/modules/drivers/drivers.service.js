@@ -20,6 +20,8 @@
         this.deleteDriver = deleteDriver;
         this.updateStatus = updateStatus;
         this.getUserDrivers = getUserDrivers;
+        this.getDriverHasVerify = getDriverHasVerify;
+        this.getDriverHasNoVerify = getDriverHasNoVerify;
 
         /** Internal functions */
 
@@ -59,6 +61,16 @@
         }
         function getUserDrivers(params) {
             var url = [HOST_API,'api/admin/users/get'].join('/');
+            return $http.get(url,{params : params });
+        }
+
+        function getDriverHasVerify(params) {
+            var url = [HOST_API,'api/admin/users/has-verify'].join('/');
+            return $http.get(url,{params : params });
+        }
+
+        function getDriverHasNoVerify(params) {
+            var url = [HOST_API,'api/admin/users/has-no-verify'].join('/');
             return $http.get(url,{params : params });
         }
     }

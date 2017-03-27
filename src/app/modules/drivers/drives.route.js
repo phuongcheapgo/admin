@@ -19,9 +19,26 @@
         $stateProvider
             .state('app.drivers', {
                 url: '/drivers',
-                controller : 'drivers.controller',
+                //controller : 'drivers.controller',
+                template: '<ui-view></ui-view>',
+                middleware: ['auth']
+            })
+            .state('app.drivers.list', {
+                url: '/list',
+                controller : 'drivers.controller.list',
                 templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
-                data: {pageTitle: 'AngularJS Ui Select'},
+                middleware: ['auth']
+            })
+            .state('app.drivers.verify', {
+                url: '/verify',
+                controller : 'drivers.controller.list',
+                templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
+                middleware: ['auth']
+            })
+            .state('app.drivers.not_verify', {
+                url: '/verify',
+                controller : 'drivers.controller.list',
+                templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
                 middleware: ['auth']
             })
             .state('app.drivers_add', {
@@ -39,7 +56,6 @@
                 },
                 controller : 'drivers.add.controller',
                 templateUrl: [ROOT_PATH,'drivers.add.html'].join('/'),
-                data: {pageTitle: 'AngularJS Ui Select'},
                 middleware: ['auth']
             })
     }

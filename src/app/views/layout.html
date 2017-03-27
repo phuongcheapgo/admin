@@ -33,11 +33,22 @@
                                         <span class="sidebar-mini-hide">Users Management</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a ui-sref-active="active" ui-sref="app.drivers">
-                                        <i class="fa fa-car" aria-hidden="true"></i>
+                                <li ng-class="{'open' : $state.includes('app.drivers')}">
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#">
+                                        <i class="fa fa-cogs" aria-hidden="true"></i>
                                         <span class="sidebar-mini-hide">Drivers Management</span>
                                     </a>
+                                    <ul>
+                                        <li>
+                                            <a ui-sref-active="active" ui-sref="app.drivers.list">General Document</a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref-active="active" ui-sref="app.drivers.verify">Verified Document</a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref-active="active" ui-sref="app.drivers.not_verify">Unverified Document</a>
+                                        </li>
+                                    </ul>
                                 </li>
 
                                 <li>
@@ -54,7 +65,7 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a ui-sref-active="active" ui-sref="app.configuration.driver-types">Vehicle Type</a>
+                                            <a ui-sref-active="active" ui-sref="app.configuration.driver-types"> Vehicle Type</a>
                                         </li>
                                     </ul>
                                 </li>
