@@ -18,6 +18,7 @@
         this.getInActivatedDriver = getInActivatedDriver;
         this.getActivatedDriver = getActivatedDriver;
         this.getTopRatingDriver = getTopRatingDriver;
+        this.getTopRatingTrip = getTopRatingTrip;
 
 
         /** Internal functions */
@@ -44,6 +45,11 @@
 
         function getTopRatingDriver(params) {
             var url = [HOST_API,URI,'get-top-rating-driver'].join('/');
+            return $http.get(url,{params : params });
+        }
+
+        function getTopRatingTrip(params) {
+            var url = [HOST_API,URI,'get-top-rating-trip'].join('/');
             return $http.get(url,{params : params });
         }
     }

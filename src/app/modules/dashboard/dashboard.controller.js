@@ -25,6 +25,7 @@
             getInActivatedDriver();
             getActivatedDriver();
             getTopRatingDriver();
+            getTopRatingTrip();
         })();
 
 
@@ -97,6 +98,33 @@
                     });
 
                     console.log();
+                }catch (e){
+                    console.log(e);
+                }
+            });
+        }
+
+        function getTopRatingTrip() {
+            dashboardAPI.getTopRatingTrip().then(function (res) {
+                try{
+                    $scope.top_rating_trip = res.data.rows.map(function (item) {
+
+                        var rates = [];
+                        for(var i = 1; i <= item.rate; i++)
+                        {
+                            rates.push(i);
+                        }
+
+                        if(item.rate - rates.length > 0){
+                            rates.push(item.rate - rates.length);
+                        }
+
+                        item.rating_range = rates;
+
+                        console.log(rates);
+
+                        return item;
+                    });
                 }catch (e){
                     console.log(e);
                 }
