@@ -56,6 +56,10 @@
             <tr ng-repeat-end="" ng-if="item.show">
                 <td colspan="100%" ng-include="'app/modules/drivers/views/drivers.list.html'"></td>
             </tr>
+
+            <tr ng-if="users.length == 0">
+                <td colspan="100%" class="text-center">No data</td>
+            </tr>
         </table>
         <ul ng-if="pagination.total" uib-pagination boundary-links="true" total-items="pagination.total" ng-model="pagination.page" ng-change="pageChanged()" items-per-page="pagination.limit" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 

@@ -41,6 +41,18 @@
                 templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
                 middleware: ['auth']
             })
+            .state('app.drivers.inactivated', {
+                url: '/inactivated',
+                controller : 'drivers.controller.list',
+                templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
+                middleware: ['auth']
+            })
+            .state('app.drivers.activated', {
+                url: '/activated',
+                controller : 'drivers.controller.list',
+                templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
+                middleware: ['auth']
+            })
             .state('app.drivers_add', {
                 url: '/drivers_add/:id/user/{user}',
                 params : {

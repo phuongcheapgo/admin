@@ -19,9 +19,11 @@
         $scope.changeFilter = changeFilter;
 
 
-    (function onInit() {
+        (function onInit() {
             getNewUser();
             getNewVehicle();
+            getInActivatedDriver();
+            getActivatedDriver();
         })();
 
 
@@ -45,6 +47,28 @@
             dashboardAPI.getNewVehicle(params).then(function (res) {
                 try{
                     $scope.total.vehicle = res.data.result;
+                }catch (e){
+                    console.log(e);
+                }
+            });
+        }
+
+        function getInActivatedDriver() {
+            dashboardAPI.getInActivatedDriver().then(function (res) {
+                try {
+                    $scope.total.inactivated_driver = res.data.result;
+                    console.log();
+                }catch (e){
+                    console.log(e);
+                }
+            });
+        }
+
+        function getActivatedDriver() {
+            dashboardAPI.getActivatedDriver().then(function (res) {
+                try {
+                    $scope.total.activated_driver = res.data.result;
+                    console.log();
                 }catch (e){
                     console.log(e);
                 }

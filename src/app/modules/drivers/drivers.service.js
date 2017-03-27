@@ -22,6 +22,8 @@
         this.getUserDrivers = getUserDrivers;
         this.getDriverHasVerify = getDriverHasVerify;
         this.getDriverHasNoVerify = getDriverHasNoVerify;
+        this.getDriverInactivatedList = getDriverInactivatedList;
+        this.getDriverActivatedList = getDriverActivatedList;
 
         /** Internal functions */
 
@@ -71,6 +73,18 @@
 
         function getDriverHasNoVerify(params) {
             var url = [HOST_API,'api/admin/users/has-no-verify'].join('/');
+            return $http.get(url,{params : params });
+        }
+
+        function getDriverInactivatedList(params) {
+            params.activation = false;
+            var url = [HOST_API,'api/admin/users/get-activation-driver'].join('/');
+            return $http.get(url,{params : params });
+        }
+
+        function getDriverActivatedList(params) {
+            params.activation = true;
+            var url = [HOST_API,'api/admin/users/get-activation-driver'].join('/');
             return $http.get(url,{params : params });
         }
     }

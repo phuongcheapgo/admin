@@ -111,45 +111,35 @@
         function getUserDrivers() {
             var params = _getParamsList();
             drivesAPI.getUserDrivers(params).then(function (res) {
-                try{
-                    $scope.users = res.data.rows;
-                    $scope.pagination.page = res.data.page;
-                    $scope.pagination.total = res.data.total;
-
-                    _this.fixedList = angular.copy($scope.users);
-                }catch (e){
-
-                }
+                return _success_callback(res);
             });
         }
 
         function getDriverHasVerify() {
             var params = _getParamsList();
             drivesAPI.getDriverHasVerify(params).then(function (res) {
-                try{
-                    $scope.users = res.data.rows;
-                    $scope.pagination.page = res.data.page;
-                    $scope.pagination.total = res.data.total;
-
-                    _this.fixedList = angular.copy($scope.users);
-                }catch (e){
-
-                }
+                return _success_callback(res);
             });
         }
 
         function getDriverHasNoVerify() {
             var params = _getParamsList();
             drivesAPI.getDriverHasNoVerify(params).then(function (res) {
-                try{
-                    $scope.users = res.data.rows;
-                    $scope.pagination.page = res.data.page;
-                    $scope.pagination.total = res.data.total;
+                return _success_callback(res);
+            });
+        }
 
-                    _this.fixedList = angular.copy($scope.users);
-                }catch (e){
+        function getDriverInactivatedList() {
+            var params = _getParamsList();
+            drivesAPI.getDriverInactivatedList(params).then(function (res) {
+                return _success_callback(res);
+            });
+        }
 
-                }
+        function getDriverActivatedList() {
+            var params = _getParamsList();
+            drivesAPI.getDriverActivatedList(params).then(function (res) {
+                return _success_callback(res);
             });
         }
 
@@ -260,8 +250,6 @@
 
             _res = Object.assign(_res,$scope.sortParams);
 
-
-
             return _res;
         }
 
@@ -294,6 +282,15 @@
             if(route.name == 'app.drivers.list'){
                 return 'list';
             }
+
+            if(route.name == 'app.drivers.inactivated'){
+                return 'inactivated';
+            }
+
+            if(route.name == 'app.drivers.activated'){
+                return 'activated';
+            }
+
         }
 
         function getList() {
@@ -314,7 +311,30 @@
                 return getDriverHasNoVerify();
             }
 
+            if(route == 'inactivated')
+            {
+                return getDriverInactivatedList();
+            }
 
+            if(route == 'activated')
+            {
+                return getDriverActivatedList();
+            }
+
+
+        }
+
+
+        function _success_callback(res) {
+            try{
+                $scope.users = res.data.rows;
+                $scope.pagination.page = res.data.page;
+                $scope.pagination.total = res.data.total;
+
+                _this.fixedList = angular.copy($scope.users);
+            }catch (e){
+
+            }
         }
     }
 })();
