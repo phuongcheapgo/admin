@@ -654,7 +654,7 @@ App.directive('jsSimplemde', function () {
 });
 
 
-App.directive('imgLightbox',/** @ngInject */function($sce , CONFIG, $http){
+App.directive('imgLightbox',/** @ngInject */function($sce , CONFIG, $http, $localStorage){
     return {
         link: function (scope, element, attrs) {
 
@@ -670,19 +670,28 @@ App.directive('imgLightbox',/** @ngInject */function($sce , CONFIG, $http){
 
             if(attrs.id)
             {
+                var token = $localStorage.AUTHENTICATE_TOKEN;
                 var HOST_API = CONFIG.HOST_API;
                 var URI = 'api/admin/get-image';
                 var url = [HOST_API,URI,attrs.id].join('/');
 
-                $http.get(url).then(function (res) {
-                    var src = ['data:image/false;base64,',res.data].join('');
-                    element.magnificPopup({
-                        items: {
-                            src: src
-                        },
-                        type: 'image' // this is default type
-                    });
-                });
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        var src = ['data:image/false;base64,',xhttp.responseText].join('');
+                        element.magnificPopup({
+                            items: {
+                                src: src
+                            },
+                            type: 'image' // this is default type
+                        });
+                    }
+                };
+                xhttp.open("GET", url);
+                xhttp.setRequestHeader("Authorization", 'Bearer '+token);
+                xhttp.send();
+
             }
 
 
@@ -728,24 +737,30 @@ App.directive('tableSort',/** @ngInject */function () {
     }
 });
 
-App.directive('imgRequest',/** @ngInject */function ($http, CONFIG) {
+App.directive('imgRequest',/** @ngInject */function ($http, CONFIG, $localStorage) {
     return {
         link : function (scope, element, attrs) {
+
+            var token = $localStorage.AUTHENTICATE_TOKEN;
             var HOST_API = CONFIG.HOST_API;
             var URI = 'api/admin/get-image';
-
             var url = [HOST_API,URI,attrs.id].join('/');
 
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
 
+                    var img = new Image();
+                    img.src = ['data:image/false;base64,',xhttp.responseText].join('');
+                    img.width = attrs.width || 50;
+                    img.height = attrs.height || 50;
+                    element.append(img);
+                }
+            };
+            xhttp.open("GET", url);
+            xhttp.setRequestHeader("Authorization", 'Bearer '+token);
+            xhttp.send();
 
-            $http.get(url).then(function (res) {
-
-                var img = new Image();
-                img.src = ['data:image/false;base64,',res.data].join('');
-                img.width = attrs.width || 50;
-                img.height = attrs.height || 50;
-                element.append(img);
-            });
         }
     }
 });
