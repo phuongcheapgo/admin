@@ -36,7 +36,7 @@
                 middleware: ['auth']
             })
             .state('app.drivers.not_verify', {
-                url: '/verify',
+                url: '/unverified',
                 controller : 'drivers.controller.list',
                 templateUrl: [ROOT_PATH,'drivers.user.html'].join('/'),
                 middleware: ['auth']
