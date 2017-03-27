@@ -24,6 +24,7 @@
             getNewVehicle();
             getInActivatedDriver();
             getActivatedDriver();
+            getTopRatingDriver();
         })();
 
 
@@ -68,6 +69,33 @@
             dashboardAPI.getActivatedDriver().then(function (res) {
                 try {
                     $scope.total.activated_driver = res.data.result;
+                    console.log();
+                }catch (e){
+                    console.log(e);
+                }
+            });
+        }
+
+        function getTopRatingDriver() {
+            dashboardAPI.getTopRatingDriver().then(function (res) {
+                try {
+                    $scope.top_rating_driver = res.data.rows.map(function (item) {
+                        var temp = item.rating.total/item.rating.number;
+                        var rates = [];
+                        for(var i = 1; i <= temp; i++)
+                        {
+                            rates.push(i);
+                        }
+
+                        if(temp - rates.length > 0){
+                            rates.push(temp - rates.length);
+                        }
+
+                        item.rating_range = rates;
+
+                        return item;
+                    });
+
                     console.log();
                 }catch (e){
                     console.log(e);

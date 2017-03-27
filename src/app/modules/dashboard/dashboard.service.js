@@ -17,6 +17,7 @@
         this.getNewVehicle = getNewVehicle;
         this.getInActivatedDriver = getInActivatedDriver;
         this.getActivatedDriver = getActivatedDriver;
+        this.getTopRatingDriver = getTopRatingDriver;
 
 
         /** Internal functions */
@@ -38,6 +39,11 @@
 
         function getActivatedDriver(params) {
             var url = [HOST_API,URI,'get-activated-driver'].join('/');
+            return $http.get(url,{params : params });
+        }
+
+        function getTopRatingDriver(params) {
+            var url = [HOST_API,URI,'get-top-rating-driver'].join('/');
             return $http.get(url,{params : params });
         }
     }
